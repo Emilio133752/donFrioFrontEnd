@@ -7,7 +7,6 @@ import Produtos from './Pages/Produtos/Produtos';
 import Sobre from './Pages/SobreNos/SobreNos'
 import Gerente from './Pages/Gerente/Gerente';
 import PrivateRoute from './Components/PrivateRoute';
-import Colaborador from './Pages/Colaborador/Colaborador';
 import axios from 'axios';
 
 export const authEvents = {
@@ -71,11 +70,6 @@ const NavigationBar = ({ user, setUser }) => {
             {user?.role === 'gerente' && (
               <Nav.Link as={Link} to="/gerente">Gerência</Nav.Link>
             )}
-
-            {user?.role === 'colaborador' && (
-              <Nav.Link as={Link} to="/colaborador">Colaborador</Nav.Link>
-            )}
-
             {!user ? (
               <Button variant="primary" onClick={() => navigate('/login')}>Login</Button>
             ) : (
@@ -102,11 +96,6 @@ function App() {
           <Route path="/login" element={<AuthForm />} />
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/sobre-nos" element={<Sobre />} />
-          <Route path="/colaborador" element={
-            <PrivateRoute user={user} allowedRoles={['colaborador']}>
-              <Colaborador />
-            </PrivateRoute>
-          }/>
           <Route path="/gerente" element={
             <PrivateRoute user={user} allowedRoles={['gerente']}>
               <Gerente />
