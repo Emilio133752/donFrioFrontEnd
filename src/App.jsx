@@ -8,6 +8,7 @@ import Sobre from './Pages/SobreNos/SobreNos'
 import Gerente from './Pages/Gerente/Gerente';
 import PrivateRoute from './Components/PrivateRoute';
 import axios from 'axios';
+import './App.css';
 
 export const authEvents = {
   onLogin: () => window.dispatchEvent(new Event('user:login')),
@@ -57,7 +58,7 @@ const NavigationBar = ({ user, setUser }) => {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className="navbar-grande">
       <Container>
         <Navbar.Brand href="/">DonFrio</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

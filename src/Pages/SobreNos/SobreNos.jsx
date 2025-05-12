@@ -6,25 +6,25 @@ import './SobreNos.css';
 const SobreNos = () => {
   return (
     <>
-      <section className="hero-section py-5 bg-light">
+      <section className="hero-section">
         <Container>
-          <Row className="align-items-center">
-            <Col lg={6} className="mb-4 mb-lg-0">
+          <Row className="align-items-center py-5">
+            <Col lg={7} className="text-center text-lg-start mb-4 mb-lg-0">
               <div className="pe-lg-4">
-                <h1 className="display-4 fw-bold mb-3">Sobre Nós</h1>
+                <h1 className="display-5 fw-bold mb-3">Sobre Nós</h1>
                 <p className="lead mb-4">
                   Uma empresa com tradição e qualidade no mercado há mais de 20 anos, 
                   oferecendo soluções em refrigeração com excelência e compromisso.
                 </p>
-                <Button variant="primary" size="lg" className="rounded-pill px-4">
+              <Button variant="outline-light" size="lg" className="rounded-pill px-4">
                   Conheça nossos produtos
                 </Button>
               </div>
             </Col>
-            <Col lg={6} className="text-center">
+            <Col lg={4} className="text-center">
               <Image 
-                src="/images/pinguim.jpg" 
-                alt="Mascote da empresa" 
+                src="/images/sobre-nos.jpg" 
+                alt="Imagem de pessoas negociando" 
                 className="img-fluid rounded shadow-lg" 
                 style={{ maxHeight: '350px' }}
               />
@@ -57,7 +57,7 @@ const SobreNos = () => {
                   <Row className="align-items-center">
                     <Col md={4} className="text-center mb-4 mb-md-0">
                       <Image 
-                        src="/images/profile-avatar.jpg" 
+                        src="/images/ronildo.jpg" 
                         alt="Foto do representante" 
                         className="rounded-circle img-thumbnail shadow" 
                         width="150" 
@@ -65,7 +65,7 @@ const SobreNos = () => {
                       />
                     </Col>
                     <Col md={8}>
-                      <h4 className="mb-2">Carlos José da Silva</h4>
+                      <h4 className="mb-2">Ronildo Xavier</h4>
                       <p className="text-muted mb-3">Presidente e Fundador</p>
                       <p className="fst-italic mb-3">
                         "Trabalhamos para oferecer os melhores produtos de refrigeração do mercado, 
@@ -176,19 +176,15 @@ const SobreNos = () => {
                   <div className="social-card p-4 border rounded shadow-sm bg-white">
                     <div className="d-flex align-items-center mb-3">
                       <Image 
-                        src="/images/instagram-logo.png" 
+                        src="/images/instagram.png" 
                         alt="Instagram" 
-                        width="32" 
-                        height="32" 
+                        width="40" 
+                        height="40" 
                         className="me-2" 
                       />
                       <h5 className="mb-0">@refrigeracao_oficial</h5>
                     </div>
-                    <Image 
-                      src="/images/social-media-post.jpg" 
-                      alt="Postagem nas redes sociais" 
-                      className="img-fluid rounded mb-3" 
-                    />
+
                     <p className="text-muted mb-3">
                       Novos produtos chegando em nossa loja! Confira as promoções especiais
                       de lançamento e aproveite para renovar seu sistema de refrigeração.
@@ -204,10 +200,14 @@ const SobreNos = () => {
                     <Col xs={12}>
                       <div className="social-link-card p-4 border rounded shadow-sm bg-white">
                         <div className="d-flex align-items-center">
-                          <div className="social-icon me-3 rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center"
-                               style={{ width: '60px', height: '60px' }}>
-                            <i className="bi bi-facebook fs-2 text-primary"></i>
-                          </div>
+                      <Image 
+                        src="/images/facebook.webp" 
+                        alt="Facebook" 
+                        width="50" 
+                        height="50" 
+                        className="me-2" 
+                      />
+                          
                           <div>
                             <h5 className="mb-1">Facebook</h5>
                             <p className="mb-0 text-muted">@refrigeracao.oficial</p>
@@ -219,10 +219,13 @@ const SobreNos = () => {
                     <Col xs={12}>
                       <div className="social-link-card p-4 border rounded shadow-sm bg-white">
                         <div className="d-flex align-items-center">
-                          <div className="social-icon me-3 rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center"
-                               style={{ width: '60px', height: '60px' }}>
-                            <i className="bi bi-youtube fs-2 text-danger"></i>
-                          </div>
+                      <Image 
+                        src="/images/youtube.avif" 
+                        alt="Youtube" 
+                        width="50" 
+                        height="50" 
+                        className="me-2" 
+                      />
                           <div>
                             <h5 className="mb-1">YouTube</h5>
                             <p className="mb-0 text-muted">Canal Refrigeração</p>
@@ -234,10 +237,13 @@ const SobreNos = () => {
                     <Col xs={12}>
                       <div className="social-link-card p-4 border rounded shadow-sm bg-white">
                         <div className="d-flex align-items-center">
-                          <div className="social-icon me-3 rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center"
-                               style={{ width: '60px', height: '60px' }}>
-                            <i className="bi bi-linkedin fs-2 text-info"></i>
-                          </div>
+                      <Image 
+                        src="/images/linkedin.avif" 
+                        alt="Linkedin" 
+                        width="50" 
+                        height="50" 
+                        className="me-2" 
+                      />
                           <div>
                             <h5 className="mb-1">LinkedIn</h5>
                             <p className="mb-0 text-muted">Empresa Refrigeração Ltda</p>
