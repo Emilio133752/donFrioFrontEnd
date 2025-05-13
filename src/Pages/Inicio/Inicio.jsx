@@ -84,7 +84,7 @@ const Inicio = () => {
       <section className="why-us py-5">
         <Container>
           <div className="section-header text-center mb-5">
-            <h2 className="fw-bold position-relative d-inline-block pb-2">Somos 5</h2>
+            <h2 className="fw-bold position-relative d-inline-block pb-2">Somos 5 ⭐</h2>
             <p className="text-muted mt-2">5 motivos para escolher nossos produtos</p>
           </div>
 
