@@ -14,7 +14,7 @@ const Produtos = () => {
       id: 1,
       nome: 'Ventilador de Teto Classic',
       preco: 289.90,
-      imagem: '/images/ventilador-teto.jpg', 
+      imagem: '/images/ventilador-teto.webp', 
       categoria: 'ventiladores',
       destaque: true,
       descricao: '3 pás, controle de velocidade e iluminação integrada'
@@ -23,7 +23,7 @@ const Produtos = () => {
       id: 2, 
       nome: 'Ventilador de Teto Premium',
       preco: 349.90,
-      imagem: '/images/ventilador-teto-2.jpg',
+      imagem: '/images/ventilador-teto-premium.webp',
       categoria: 'ventiladores',
       destaque: false,
       descricao: 'Design moderno com 3 pás em madeira natural'
@@ -32,7 +32,7 @@ const Produtos = () => {
       id: 3,
       nome: 'Ventilador de Mesa Turbo',
       preco: 149.90,
-      imagem: '/images/ventilador-mesa.jpg',
+      imagem: '/images/ventilador-de-mesa.jpeg',
       categoria: 'ventiladores',
       destaque: false,
       descricao: '40cm, 3 velocidades, oscilante'
@@ -41,7 +41,7 @@ const Produtos = () => {
       id: 4,
       nome: 'Ar Condicionado Split 9000 BTUs',
       preco: 1299.90,
-      imagem: '/images/ar-split.jpg',
+      imagem: '/images/ar-condicionado-split.jpg',
       categoria: 'ar-condicionado',
       destaque: true,
       descricao: 'Frio, classe A em economia de energia'
@@ -50,7 +50,7 @@ const Produtos = () => {
       id: 5,
       nome: 'Ar Condicionado Portátil',
       preco: 899.90,
-      imagem: '/images/ar-portatil.jpg',
+      imagem: '/images/ar-condicionado-portatil.jpg',
       categoria: 'ar-condicionado',
       destaque: false,
       descricao: '12000 BTUs, ideal para ambientes até 15m²'
@@ -68,7 +68,7 @@ const Produtos = () => {
       id: 7,
       nome: 'Cortina de Ar 90cm',
       preco: 799.90,
-      imagem: '/images/cortina-ar.jpg',
+      imagem: '/images/cortina-de-ar.jpg',
       categoria: 'comercial',
       destaque: false,
       descricao: 'Ideal para entradas de comércios e estabelecimentos'
@@ -77,7 +77,7 @@ const Produtos = () => {
       id: 8,
       nome: 'Ar Condicionado Janela 10000 BTUs',
       preco: 999.90,
-      imagem: '/images/ar-janela.jpg',
+      imagem: '/images/ar-condicionado-janela.png',
       categoria: 'ar-condicionado',
       destaque: false,
       descricao: 'Refrigeração rápida, fácil instalação'
@@ -98,11 +98,11 @@ const Produtos = () => {
 
   return (
     <>
-      <section className="produtos-hero py-5">
+      <section className="produtos-hero">
         <Container>
-          <Row className="align-items-center">
-            <Col lg={7} className="text-white">
-              <h1 className="display-4 fw-bold mb-3">O melhor do mundo da refrigeração</h1>
+          <Row className="align-items-center py-5">
+            <Col lg={7} className="text-white text-center text-lg-start mb-4 mb-lg-0">
+              <h1 className="display-5 fw-bold mb-3">O melhor do mundo da refrigeração</h1>
               <p className="lead mb-4">
                 Encontre soluções completas para seu conforto térmico com qualidade e economia.
               </p>
@@ -112,7 +112,7 @@ const Produtos = () => {
             </Col>
             <Col lg={5} className="d-none d-lg-block">
               <img 
-                src="/images/ar-split.jpg" 
+                src="/images/produtos-refrigeracao.webp" 
                 alt="Produtos de refrigeração" 
                 className="img-fluid rounded shadow-lg" 
               />
@@ -280,7 +280,7 @@ const Produtos = () => {
                             </small>
                           </div>
                           <Button variant="primary" className="w-100">
-                            Adicionar ao carrinho
+                            Atendimento via Whatsapp
                           </Button>
                         </Card.Body>
                       </Card>

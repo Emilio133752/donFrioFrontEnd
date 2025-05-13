@@ -15,7 +15,7 @@ const Inicio = () => {
             </Col>
             <Col lg={6} className="text-center">
               <img 
-                src="/images/hero-banner.jpg" 
+                src="../Images/logo.jpg" 
                 alt="Produtos de refrigeração" 
                 className="img-fluid hero-image rounded shadow-lg"
               />
@@ -33,7 +33,7 @@ const Inicio = () => {
             <Col lg={4} md={6} className="mb-4">
               <Card className="product-card h-100 border-0 shadow-sm">
                 <div className="product-img-wrapper">
-                  <Card.Img variant="top" src="/images/ar-condicionado.jpg" alt="Ar-condicionado" className="product-img" />
+                  <Card.Img variant="top" src="../Images/ar-condicionado.jpeg" alt="Ar-condicionado" className="product-img" />
                 </div>
                 <Card.Body className="text-center">
                   <Card.Title className="fw-bold">Ar-condicionado</Card.Title>
@@ -49,7 +49,7 @@ const Inicio = () => {
             <Col lg={4} md={6} className="mb-4">
               <Card className="product-card h-100 border-0 shadow-sm">
                 <div className="product-img-wrapper">
-                  <Card.Img variant="top" src="/images/geladeira.jpg" alt="Geladeira" className="product-img" />
+                  <Card.Img variant="top" src="/images/geladeira.webp" alt="Geladeira" className="product-img" />
                 </div>
                 <Card.Body className="text-center">
                   <Card.Title className="fw-bold">Geladeira</Card.Title>
@@ -65,7 +65,7 @@ const Inicio = () => {
             <Col lg={4} md={6} className="mb-4">
               <Card className="product-card h-100 border-0 shadow-sm">
                 <div className="product-img-wrapper">
-                  <Card.Img variant="top" src="/images/freezer.jpg" alt="Freezer" className="product-img" />
+                  <Card.Img variant="top" src="/images/freezer.webp" alt="Freezer" className="product-img" />
                 </div>
                 <Card.Body className="text-center">
                   <Card.Title className="fw-bold">Freezer</Card.Title>
@@ -84,7 +84,7 @@ const Inicio = () => {
       <section className="why-us py-5">
         <Container>
           <div className="section-header text-center mb-5">
-            <h2 className="fw-bold position-relative d-inline-block pb-2">Somos 5</h2>
+            <h2 className="fw-bold position-relative d-inline-block pb-2">Somos 5 ⭐</h2>
             <p className="text-muted mt-2">5 motivos para escolher nossos produtos</p>
           </div>
 
@@ -118,6 +118,30 @@ const Inicio = () => {
                 <p className="text-muted mb-0">Atendimento especializado para tirar todas as suas dúvidas</p>
               </div>
             </Col>
+
+            <Row className="g-4 justify-content-center">
+              <Col md={4}>
+                <div className="feature-box text-center p-4 h-100">
+                  <div className="feature-icon mx-auto mb-4">
+                    <span className="number">4</span>
+                  </div>
+                  <h4 className="mb-3">Qualidade certificada</h4>
+                  <p className="text-muted mb-0">Trabalhamos com produtos testados e aprovados, garantindo segurança e durabilidade.</p>
+                </div>
+              </Col>
+
+              <Col md={4}>
+                <div className="feature-box text-center p-4 h-100">
+                  <div className="feature-icon mx-auto mb-4">
+                    <span className="number">5</span>
+                  </div>
+                  <h4 className="mb-3">Pagamento facilitado</h4>
+                  <p className="text-muted mb-0">Aceitamos diversas formas de pagamento com possibilidade de parcelamento sem juros.</p>
+                </div>
+              </Col>
+            </Row>
+
+
           </Row>
         </Container>
       </section>
@@ -158,7 +182,7 @@ const Inicio = () => {
                   <Card.Body className="p-4">
                     <div className="d-flex mb-4">
                       <div className="testimonial-img me-3">
-                        <img src="/images/casal-feedback.jpg" alt="Cliente satisfeito" className="rounded-circle" />
+                        <img src="/images/casal-feedback.jpeg" alt="Cliente satisfeito" className="rounded-circle" />
                       </div>
                       <div>
                         <h5 className="fw-bold mb-1">João e Maria Silva</h5>
@@ -182,10 +206,10 @@ const Inicio = () => {
                   <Card.Body className="p-4">
                     <div className="d-flex mb-4">
                       <div className="testimonial-img me-3">
-                        <img src="/images/tecnico-feedback.jpg" alt="Técnico instalando" className="rounded-circle" />
+                        <img src="/images/tecnico-feedback.avif" alt="Técnico de conserto" className="rounded-circle" />
                       </div>
                       <div>
-                        <h5 className="fw-bold mb-1">Carlos Oliveira</h5>
+                        <h5 className="fw-bold mb-1">Ricardo Oliveira</h5>
                         <p className="text-muted">Adquiriu ar-condicionado com instalação</p>
                       </div>
                     </div>
@@ -243,7 +267,7 @@ const Inicio = () => {
             </Col>
           </Row>
           <div className="text-center py-3 border-top">
-            <p className="mb-0 text-muted">&copy; 2023 EMPRESA - Todos os direitos reservados</p>
+            <p className="mb-0 text-muted">&copy; 2025 EMPRESA - Todos os direitos reservados</p>
           </div>
         </Container>
       </footer>
