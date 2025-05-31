@@ -1,98 +1,34 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Card, Button, Form, Breadcrumb, Badge } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Container, Row, Col, Card, Button, Form, Badge } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Produtos.css';
 
 const Produtos = () => {
-
+  const [produtos, setProdutos] = useState([]);
   const [categoriaAtiva, setCategoriaAtiva] = useState('todos');
   const [precoRange, setPrecoRange] = useState(2000);
   const [termoBusca, setTermoBusca] = useState('');
 
-  const produtos = [
-    {
-      id: 1,
-      nome: 'Ventilador de Teto Classic',
-      preco: 289.90,
-      imagem: '/images/ventilador-teto.webp', 
-      categoria: 'ventiladores',
-      destaque: true,
-      descricao: '3 pás, controle de velocidade e iluminação integrada'
-    },
-    {
-      id: 2, 
-      nome: 'Ventilador de Teto Premium',
-      preco: 349.90,
-      imagem: '/images/ventilador-teto-premium.webp',
-      categoria: 'ventiladores',
-      destaque: false,
-      descricao: 'Design moderno com 3 pás em madeira natural'
-    },
-    {
-      id: 3,
-      nome: 'Ventilador de Mesa Turbo',
-      preco: 149.90,
-      imagem: '/images/ventilador-de-mesa.jpeg',
-      categoria: 'ventiladores',
-      destaque: false,
-      descricao: '40cm, 3 velocidades, oscilante'
-    },
-    {
-      id: 4,
-      nome: 'Ar Condicionado Split 9000 BTUs',
-      preco: 1299.90,
-      imagem: '/images/ar-condicionado-split.jpg',
-      categoria: 'ar-condicionado',
-      destaque: true,
-      descricao: 'Frio, classe A em economia de energia'
-    },
-    {
-      id: 5,
-      nome: 'Ar Condicionado Portátil',
-      preco: 899.90,
-      imagem: '/images/ar-condicionado-portatil.jpg',
-      categoria: 'ar-condicionado',
-      destaque: false,
-      descricao: '12000 BTUs, ideal para ambientes até 15m²'
-    },
-    {
-      id: 6,
-      nome: 'Climatizador de Ar Frio',
-      preco: 499.90,
-      imagem: '/images/climatizador.jpg',
-      categoria: 'climatizadores',
-      destaque: true,
-      descricao: 'Função umidificador e purificador, 3 velocidades'
-    },
-    {
-      id: 7,
-      nome: 'Cortina de Ar 90cm',
-      preco: 799.90,
-      imagem: '/images/cortina-de-ar.jpg',
-      categoria: 'comercial',
-      destaque: false,
-      descricao: 'Ideal para entradas de comércios e estabelecimentos'
-    },
-    {
-      id: 8,
-      nome: 'Ar Condicionado Janela 10000 BTUs',
-      preco: 999.90,
-      imagem: '/images/ar-condicionado-janela.png',
-      categoria: 'ar-condicionado',
-      destaque: false,
-      descricao: 'Refrigeração rápida, fácil instalação'
-    }
-  ];
+
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/produtos');
+        setProdutos(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+      }
+    };
+
+    fetchProdutos();
+  }, []);
 
   const produtosFiltrados = produtos.filter(produto => {
-
     const matchCategoria = categoriaAtiva === 'todos' || produto.categoria === categoriaAtiva;
-    
     const matchPreco = produto.preco <= precoRange;
-    
-    const matchBusca = produto.nome.toLowerCase().includes(termoBusca.toLowerCase()) || 
-                      produto.descricao.toLowerCase().includes(termoBusca.toLowerCase());
-    
+    const matchBusca = produto.nome.toLowerCase().includes(termoBusca.toLowerCase()) ||
+                       produto.descricao.toLowerCase().includes(termoBusca.toLowerCase());
     return matchCategoria && matchPreco && matchBusca;
   });
 
@@ -106,7 +42,7 @@ const Produtos = () => {
               <p className="lead mb-4">
                 Encontre soluções completas para seu conforto térmico com qualidade e economia.
               </p>
-              <Button variant="outline-light" size="lg" className="rounded-pill px-4">
+              <Button variant="outline-light" size="lg" className="rounded-pill px-4" href='https://web.whatsapp.com/' >
                 Fale com um especialista
               </Button>
             </Col>
@@ -150,41 +86,20 @@ const Produtos = () => {
                 <Card.Body>
                   <h6 className="mb-3">Categorias</h6>
                   <div className="d-flex flex-column">
-                    <Button 
-                      variant={categoriaAtiva === 'todos' ? 'primary' : 'outline-primary'} 
-                      className="mb-2 text-start"
-                      onClick={() => setCategoriaAtiva('todos')}
-                    >
-                      Todos os produtos
-                    </Button>
-                    <Button 
-                      variant={categoriaAtiva === 'ar-condicionado' ? 'primary' : 'outline-primary'} 
-                      className="mb-2 text-start"
-                      onClick={() => setCategoriaAtiva('ar-condicionado')}
-                    >
-                      Ar Condicionado
-                    </Button>
-                    <Button 
-                      variant={categoriaAtiva === 'ventiladores' ? 'primary' : 'outline-primary'} 
-                      className="mb-2 text-start"
-                      onClick={() => setCategoriaAtiva('ventiladores')}
-                    >
-                      Ventiladores
-                    </Button>
-                    <Button 
-                      variant={categoriaAtiva === 'climatizadores' ? 'primary' : 'outline-primary'} 
-                      className="mb-2 text-start"
-                      onClick={() => setCategoriaAtiva('climatizadores')}
-                    >
-                      Climatizadores
-                    </Button>
-                    <Button 
-                      variant={categoriaAtiva === 'comercial' ? 'primary' : 'outline-primary'} 
-                      className="mb-2 text-start"
-                      onClick={() => setCategoriaAtiva('comercial')}
-                    >
-                      Linha Comercial
-                    </Button>
+                    {['todos', 'ar-condicionado', 'ventiladores', 'climatizadores', 'comercial'].map(cat => (
+                      <Button 
+                        key={cat}
+                        variant={categoriaAtiva === cat ? 'primary' : 'outline-primary'} 
+                        className="mb-2 text-start"
+                        onClick={() => setCategoriaAtiva(cat)}
+                      >
+                        {cat === 'todos' && 'Todos os produtos'}
+                        {cat === 'ar-condicionado' && 'Ar Condicionado'}
+                        {cat === 'ventiladores' && 'Ventiladores'}
+                        {cat === 'climatizadores' && 'Climatizadores'}
+                        {cat === 'comercial' && 'Linha Comercial'}
+                      </Button>
+                    ))}
                   </div>
 
                   <hr className="my-4" />
@@ -202,30 +117,10 @@ const Produtos = () => {
                     <small>R$ 100,00</small>
                     <small>R$ 2.000,00</small>
                   </div>
-
-                  <hr className="my-4" />
-                  
-                  <div className="d-grid">
-                    <Button variant="success">
-                      <i className="bi bi-whatsapp me-2"></i>
-                      Atendimento via WhatsApp
-                    </Button>
-                  </div>
-                </Card.Body>
-              </Card>
-              
-              <Card className="border-0 shadow-sm mt-4 bg-primary text-white">
-                <Card.Body className="text-center p-4">
-                  <h5>Precisa de ajuda?</h5>
-                  <p className="mb-3">Nossos especialistas estão prontos para te auxiliar na escolha do produto ideal.</p>
-                  <Button variant="light">
-                    <i className="bi bi-telephone me-2"></i>
-                    (11) 1234-5678
-                  </Button>
                 </Card.Body>
               </Card>
             </Col>
-       
+
             <Col lg={9}>
               <div className="d-flex justify-content-between align-items-center mb-4">
                 <h2>Nossos Produtos</h2>
@@ -233,7 +128,7 @@ const Produtos = () => {
                   Exibindo {produtosFiltrados.length} de {produtos.length} produtos
                 </div>
               </div>
-              
+
               <Row className="g-4">
                 {produtosFiltrados.length > 0 ? (
                   produtosFiltrados.map(produto => (
@@ -247,7 +142,7 @@ const Produtos = () => {
                         <div className="produto-img-container">
                           <Card.Img 
                             variant="top" 
-                            src={produto.imagem} 
+                            src={produto.imagem || '/images/produto-padrao.jpg'} 
                             alt={produto.nome}
                             className="produto-img"
                           />
@@ -262,12 +157,7 @@ const Produtos = () => {
                         </div>
                         <Card.Body className="d-flex flex-column">
                           <div className="produto-categoria mb-2 text-muted">
-                            <small>
-                              {produto.categoria === 'ar-condicionado' && 'Ar Condicionado'}
-                              {produto.categoria === 'ventiladores' && 'Ventiladores'}
-                              {produto.categoria === 'climatizadores' && 'Climatizadores'}
-                              {produto.categoria === 'comercial' && 'Linha Comercial'}
-                            </small>
+                            <small>{produto.categoria}</small>
                           </div>
                           <Card.Title className="mb-2">{produto.nome}</Card.Title>
                           <Card.Text className="text-muted mb-3 flex-grow-1">
@@ -279,7 +169,7 @@ const Produtos = () => {
                               ou 10x de R$ {(produto.preco / 10).toFixed(2)}
                             </small>
                           </div>
-                          <Button variant="primary" className="w-100">
+                          <Button variant="primary" className="w-100" href='https://web.whatsapp.com/'>
                             Atendimento via Whatsapp
                           </Button>
                         </Card.Body>
@@ -311,18 +201,17 @@ const Produtos = () => {
         </Container>
       </section>
 
-
       <section className="bg-primary text-white py-5">
         <Container className="text-center">
           <h2 className="mb-4">Não encontrou o que procura?</h2>
           <p className="lead mb-4">
             Entre em contato com nossa equipe para soluções personalizadas
           </p>
-          <Button variant="light" size="lg" className="rounded-pill px-4 me-2">
+          <Button variant="light" size="lg" className="rounded-pill px-4 me-2" href='https://web.whatsapp.com/' >
             <i className="bi bi-envelope me-2"></i>
             Solicitar orçamento
           </Button>
-          <Button variant="outline-light" size="lg" className="rounded-pill px-4">
+          <Button variant="outline-light" size="lg" className="rounded-pill px-4" href='https://web.whatsapp.com/'>
             <i className="bi bi-telephone me-2"></i>
             Fale conosco
           </Button>

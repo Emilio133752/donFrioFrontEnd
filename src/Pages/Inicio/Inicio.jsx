@@ -1,9 +1,31 @@
-import React from 'react';
-import { Container, Row, Col, Button, Card, Form, InputGroup } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Inicio.css';
 
 const Inicio = () => {
+  const [produtos, setProdutos] = useState([]);
+
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/produtos');
+        const todosProdutos = response.data;
+        const produtosAleatorios = todosProdutos
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 3);
+
+        setProdutos(produtosAleatorios);
+      } catch (error) {
+        console.error('Erro ao buscar produtos:', error);
+      }
+    };
+
+    fetchProdutos();
+  }, []);
+
+
   return (
     <>
       <section className="hero-section">
@@ -30,57 +52,31 @@ const Inicio = () => {
             <h2 className="fw-bold position-relative d-inline-block pb-2">Produtos populares</h2>
           </div>
           <Row>
-            <Col lg={4} md={6} className="mb-4">
-              <Card className="product-card h-100 border-0 shadow-sm">
-                <div className="product-img-wrapper">
-                  <Card.Img variant="top" src="../Images/ar-condicionado.jpeg" alt="Ar-condicionado" className="product-img" />
-                </div>
-                <Card.Body className="text-center">
-                  <Card.Title className="fw-bold">Ar-condicionado</Card.Title>
-                  <Card.Text>
-                    <small className="text-muted">A partir de</small>
-                    <div className="price mb-3">R$ 1.899,00</div>
-                  </Card.Text>
-                  <Button variant="primary" className="px-4 rounded-pill">Ver detalhes</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col lg={4} md={6} className="mb-4">
-              <Card className="product-card h-100 border-0 shadow-sm">
-                <div className="product-img-wrapper">
-                  <Card.Img variant="top" src="/images/geladeira.webp" alt="Geladeira" className="product-img" />
-                </div>
-                <Card.Body className="text-center">
-                  <Card.Title className="fw-bold">Geladeira</Card.Title>
-                  <Card.Text>
-                    <small className="text-muted">A partir de</small>
-                    <div className="price mb-3">R$ 2.450,00</div>
-                  </Card.Text>
-                  <Button variant="primary" className="px-4 rounded-pill">Ver detalhes</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-
-            <Col lg={4} md={6} className="mb-4">
-              <Card className="product-card h-100 border-0 shadow-sm">
-                <div className="product-img-wrapper">
-                  <Card.Img variant="top" src="/images/freezer.webp" alt="Freezer" className="product-img" />
-                </div>
-                <Card.Body className="text-center">
-                  <Card.Title className="fw-bold">Freezer</Card.Title>
-                  <Card.Text>
-                    <small className="text-muted">A partir de</small>
-                    <div className="price mb-3">R$ 1.750,00</div>
-                  </Card.Text>
-                  <Button variant="primary" className="px-4 rounded-pill">Ver detalhes</Button>
-                </Card.Body>
-              </Card>
-            </Col>
+            {produtos.map((produto, index) => (
+              <Col lg={4} md={6} className="mb-4" key={index}>
+                <Card className="product-card h-100 border-0 shadow-sm">
+                  <div className="product-img-wrapper">
+                    <Card.Img
+                      variant="top"
+                      src={produto.imagem || '/images/default.jpg'}
+                      alt={produto.nome}
+                      className="product-img"
+                    />
+                  </div>
+                  <Card.Body className="text-center">
+                    <Card.Title className="fw-bold">{produto.nome}</Card.Title>
+                    <Card.Text>
+                      <small className="text-muted">A partir de</small>
+                      <div className="price mb-3">R$ {parseFloat(produto.preco).toFixed(2)}</div>
+                    </Card.Text>
+                    <Button variant="primary" className="px-4 rounded-pill" href='http://localhost:5173/produtos'>Ver detalhes</Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
           </Row>
         </Container>
       </section>
-
       <section className="why-us py-5">
         <Container>
           <div className="section-header text-center mb-5">
@@ -143,29 +139,6 @@ const Inicio = () => {
 
 
           </Row>
-        </Container>
-      </section>
-
-      <section className="newsletter">
-        <Container>
-          <div className="newsletter-box py-5 px-4 rounded">
-            <Row className="align-items-center">
-              <Col lg={8} className="mb-4 mb-lg-0">
-                <div className="d-flex align-items-center">
-                  <div className="newsletter-icon me-4 d-none d-md-block">
-                    <i className="email-icon">📧</i>
-                  </div>
-                  <div>
-                    <h3 className="mb-2">Receba nossas novidades</h3>
-                    <p className="mb-0 lead">Cadastre-se para receber ofertas exclusivas</p>
-                  </div>
-                </div>
-              </Col>
-              <Col lg={4} className="text-lg-end">
-                <Button variant="light" size="lg" className="fw-bold px-4 signup-btn">Cadastrar</Button>
-              </Col>
-            </Row>
-          </div>
         </Container>
       </section>
 
@@ -234,7 +207,7 @@ const Inicio = () => {
           <div className="installers-box text-center p-5 rounded">
             <h2 className="fw-bold mb-3">Se interesse por instalações</h2>
             <p className="lead mb-4">Profissionais qualificados para instalar seu equipamento com segurança e garantia</p>
-            <Button variant="light" size="lg" className="fw-bold px-4">Saiba mais</Button>
+            <Button variant="light" size="lg" className="fw-bold px-4" href='https://web.whatsapp.com/'>Saiba mais</Button>
           </div>
         </Container>
       </section>

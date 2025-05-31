@@ -1,92 +1,154 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Table, Button, Form, Modal, Badge, Tab, Tabs } from 'react-bootstrap';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Gerente.css';
 
+const API_URL = 'http://localhost:5000/api/produtos';
+const USUARIOS_API_URL = 'http://localhost:5000/api/auth/usuarios';
+
 const Gerente = () => {
 
-  const [categorias, setCategorias] = useState([
-    { id: 1, nome: 'Ar-condicionado', descricao: 'Equipamentos de ar-condicionado', status: 'Ativo', produtos: 15 },
-    { id: 2, nome: 'Geladeiras', descricao: 'Refrigeradores residenciais', status: 'Ativo', produtos: 8 },
-    { id: 3, nome: 'Freezers', descricao: 'Freezers verticais e horizontais', status: 'Ativo', produtos: 6 },
-    { id: 4, nome: 'Bebedouros', descricao: 'Bebedouros e purificadores', status: 'Inativo', produtos: 4 },
-    { id: 5, nome: 'Acessórios', descricao: 'Peças e acessórios para refrigeração', status: 'Ativo', produtos: 22 },
-  ]);
+  const [produtos, setProdutos] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
 
-  const [usuarios, setUsuarios] = useState([
-    { id: 1, nome: 'Ana Silva', email: 'ana.silva@email.com', role: 'Admin', ultimoAcesso: '10/05/2025', status: 'Online' },
-    { id: 2, nome: 'Carlos Mendes', email: 'carlos.m@email.com', role: 'Gerente', ultimoAcesso: '09/05/2025', status: 'Offline' },
-    { id: 3, nome: 'Juliana Costa', email: 'ju.costa@email.com', role: 'Vendedor', ultimoAcesso: '08/05/2025', status: 'Offline' },
-    { id: 4, nome: 'Roberto Almeida', email: 'rob.almeida@email.com', role: 'Suporte', ultimoAcesso: '10/05/2025', status: 'Online' },
-    { id: 5, nome: 'Mariana Santos', email: 'mari.santos@email.com', role: 'Vendedor', ultimoAcesso: '07/05/2025', status: 'Offline' },
-    { id: 6, nome: 'Eduardo Lima', email: 'edu.lima@email.com', role: 'Suporte', ultimoAcesso: '09/05/2025', status: 'Online' },
-    { id: 7, nome: 'Fernanda Dias', email: 'fer.dias@email.com', role: 'Gerente', ultimoAcesso: '10/05/2025', status: 'Online' },
-  ]);
+  const [showAddProduto, setShowAddProduto] = useState(false);
+  const [showEditProduto, setShowEditProduto] = useState(false);
+  const [showDeleteProduto, setShowDeleteProduto] = useState(false);
+  const [currentProduto, setCurrentProduto] = useState({});
+  const [newProduto, setNewProduto] = useState({
+    nome: '',
+    preco: 0,
+    imagem: '',
+    categoria: '',
+    destaque: false,
+    descricao: ''
+  });
 
-  const [showAddCategoria, setShowAddCategoria] = useState(false);
-  const [showEditCategoria, setShowEditCategoria] = useState(false);
-  const [showDeleteCategoria, setShowDeleteCategoria] = useState(false);
-  const [currentCategoria, setCurrentCategoria] = useState({});
-  const [newCategoria, setNewCategoria] = useState({ nome: '', descricao: '', status: 'Ativo' });
+  const fetchProdutos = async () => {
+    try {
+      const response = await fetch(API_URL);
+      if (!response.ok) throw new Error('Erro ao buscar produtos');
+      const data = await response.json();
+      setProdutos(data);
+    } catch (error) {
+      console.error(error);
+      alert('Falha ao carregar produtos');
+    }
+  };
 
-  const handleCloseAddCategoria = () => setShowAddCategoria(false);
-  const handleShowAddCategoria = () => setShowAddCategoria(true);
-  
-  const handleCloseEditCategoria = () => setShowEditCategoria(false);
-  const handleShowEditCategoria = (categoria) => {
-    setCurrentCategoria(categoria);
-    setShowEditCategoria(true);
+  const fetchUsuarios = async () => {
+    try {
+      const response = await fetch(USUARIOS_API_URL);
+      if (!response.ok) throw new Error('Erro ao buscar usuários');
+      const data = await response.json();
+      setUsuarios(data);
+    } catch (error) {
+      console.error(error);
+      alert('Falha ao carregar usuários');
+    }
   };
-  
-  const handleCloseDeleteCategoria = () => setShowDeleteCategoria(false);
-  const handleShowDeleteCategoria = (categoria) => {
-    setCurrentCategoria(categoria);
-    setShowDeleteCategoria(true);
+
+  useEffect(() => {
+    fetchProdutos();
+    fetchUsuarios();
+  }, []);
+
+  const handleCloseAddProduto = () => setShowAddProduto(false);
+  const handleShowAddProduto = () => setShowAddProduto(true);
+
+  const handleCloseEditProduto = () => setShowEditProduto(false);
+  const handleShowEditProduto = (produto) => {
+    setCurrentProduto(produto);
+    setShowEditProduto(true);
   };
-  
-  const handleAddCategoria = () => {
-    const novaCategoria = {
-      id: categorias.length + 1,
-      ...newCategoria,
-      produtos: 0
-    };
-    setCategorias([...categorias, novaCategoria]);
-    setNewCategoria({ nome: '', descricao: '', status: 'Ativo' });
-    handleCloseAddCategoria();
+
+  const handleCloseDeleteProduto = () => setShowDeleteProduto(false);
+  const handleShowDeleteProduto = (produto) => {
+    setCurrentProduto(produto);
+    setShowDeleteProduto(true);
   };
-  
-  const handleEditCategoria = () => {
-    const updatedCategorias = categorias.map(cat => 
-      cat.id === currentCategoria.id ? currentCategoria : cat
-    );
-    setCategorias(updatedCategorias);
-    handleCloseEditCategoria();
+
+  const handleAddProduto = async () => {
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProduto),
+      });
+      if (!response.ok) throw new Error('Erro ao adicionar produto');
+      await fetchProdutos();
+      setNewProduto({ nome: '', preco: 0, imagem: '', categoria: '', destaque: false, descricao: '' });
+      handleCloseAddProduto();
+    } catch (error) {
+      console.error(error);
+      alert('Falha ao adicionar produto');
+    }
   };
-  
-  const handleDeleteCategoria = () => {
-    const filteredCategorias = categorias.filter(cat => cat.id !== currentCategoria.id);
-    setCategorias(filteredCategorias);
-    handleCloseDeleteCategoria();
+
+  const handleEditProduto = async () => {
+    try {
+      const response = await fetch(`${API_URL}/${currentProduto._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(currentProduto),
+      });
+      if (!response.ok) throw new Error('Erro ao atualizar produto');
+      await fetchProdutos();
+      handleCloseEditProduto();
+    } catch (error) {
+      console.error(error);
+      alert('Falha ao atualizar produto');
+    }
   };
-  const categoriasChartData = categorias.map(cat => ({
-    name: cat.nome,
-    produtos: cat.produtos
+
+  const handleDeleteProduto = async () => {
+    try {
+      const response = await fetch(`${API_URL}/${currentProduto._id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) throw new Error('Erro ao deletar produto');
+      await fetchProdutos();
+      handleCloseDeleteProduto();
+    } catch (error) {
+      console.error(error);
+      alert('Falha ao deletar produto');
+    }
+  };
+
+  const categoriasCount = produtos.reduce((acc, produto) => {
+    acc[produto.categoria] = (acc[produto.categoria] || 0) + 1;
+    return acc;
+  }, {});
+  const produtosChartData = Object.entries(categoriasCount).map(([categoria, qtd]) => ({
+    name: categoria,
+    produtos: qtd
   }));
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
+  const formatarData = (data) => {
+    if (!data) return 'N/A';
+    return new Date(data).toLocaleDateString('pt-BR');
+  };
 
-  const roleData = [
-    { name: 'Admin', value: usuarios.filter(u => u.role === 'Admin').length },
-    { name: 'Gerente', value: usuarios.filter(u => u.role === 'Gerente').length },
-    { name: 'Vendedor', value: usuarios.filter(u => u.role === 'Vendedor').length },
-    { name: 'Suporte', value: usuarios.filter(u => u.role === 'Suporte').length }
-  ];
+  const getStatusBadgeColor = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'online': return 'success';
+      case 'offline': return 'secondary';
+      case 'ausente': return 'warning';
+      case 'ocupado': return 'danger';
+      default: return 'secondary';
+    }
+  };
 
-  const statusData = [
-    { name: 'Online', value: usuarios.filter(u => u.status === 'Online').length },
-    { name: 'Offline', value: usuarios.filter(u => u.status === 'Offline').length }
-  ];
+  const getRoleBadgeColor = (role) => {
+    switch (role?.toLowerCase()) {
+      case 'admin': return 'danger';
+      case 'gerente': return 'warning';
+      case 'funcionario': return 'primary';
+      case 'usuario': return 'secondary';
+      default: return 'secondary';
+    }
+  };
 
   return (
     <>
@@ -95,7 +157,7 @@ const Gerente = () => {
           <div className="d-flex justify-content-between align-items-center mb-4">
             <div>
               <h1 className="fw-bold">Painel de Gerenciamento</h1>
-              <p className="text-muted">Gerencie categorias e usuários do sistema</p>
+              <p className="text-muted">Gerencie produtos e usuários do sistema</p>
             </div>
             <div className="dashboard-date">
               <span className="fw-bold">Data: </span>
@@ -108,11 +170,11 @@ const Gerente = () => {
       <section className="dashboard-content py-4">
         <Container>
           <Tabs 
-            defaultActiveKey="categorias" 
+            defaultActiveKey="produtos" 
             id="dashboard-tabs"
             className="mb-4"
           >
-            <Tab eventKey="categorias" title="Gerenciamento de Categorias">
+            <Tab eventKey="produtos" title="Gerenciamento de Produtos">
               <Row>
                 <Col lg={12} className="mb-4">
                   <Card className="shadow-sm">
@@ -122,7 +184,7 @@ const Gerente = () => {
                     <Card.Body>
                       <ResponsiveContainer width="100%" height={300}>
                         <BarChart
-                          data={categoriasChartData}
+                          data={produtosChartData}
                           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                         >
                           <CartesianGrid strokeDasharray="3 3" />
@@ -140,56 +202,43 @@ const Gerente = () => {
                 <Col lg={12}>
                   <Card className="shadow-sm">
                     <Card.Header className="bg-white d-flex justify-content-between align-items-center">
-                      <h5 className="mb-0 fw-bold">Lista de Categorias</h5>
+                      <h5 className="mb-0 fw-bold">Lista de Produtos</h5>
                       <Button 
                         variant="primary" 
                         size="sm" 
-                        onClick={handleShowAddCategoria}
+                        onClick={handleShowAddProduto}
                       >
-                        <i className="bi bi-plus-circle me-1"></i> Nova Categoria
+                        <i className="bi bi-plus-circle me-1"></i> Novo Produto
                       </Button>
                     </Card.Header>
                     <Card.Body>
-                      <Table responsive hover className="categoria-table">
+                      <Table responsive hover className="produto-table">
                         <thead>
                           <tr>
-                            <th>#</th>
+                            <th>Imagem</th>
                             <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Preço</th>
+                            <th>Destaque</th>
                             <th>Descrição</th>
-                            <th>Status</th>
-                            <th>Produtos</th>
                             <th>Ações</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {categorias.map((categoria) => (
-                            <tr key={categoria.id}>
-                              <td>{categoria.id}</td>
-                              <td>{categoria.nome}</td>
-                              <td>{categoria.descricao}</td>
+                          {produtos.map(produto => (
+                            <tr key={produto.id}>
+                              <td><img src={produto.imagem} alt={produto.nome} width={60} height={60} style={{objectFit: 'cover', borderRadius: '4px'}} /></td>
+                              <td>{produto.nome}</td>
+                              <td>{produto.categoria}</td>
+                              <td>R$ {produto.preco.toFixed(2)}</td>
+                              <td>{produto.destaque ? <Badge bg="success">Sim</Badge> : <Badge bg="secondary">Não</Badge>}</td>
+                              <td>{produto.descricao}</td>
                               <td>
-                                <Badge 
-                                  bg={categoria.status === 'Ativo' ? 'success' : 'secondary'}
-                                >
-                                  {categoria.status}
-                                </Badge>
-                              </td>
-                              <td>{categoria.produtos}</td>
-                              <td>
-                                <Button 
-                                  variant="outline-primary" 
-                                  size="sm" 
-                                  className="me-2"
-                                  onClick={() => handleShowEditCategoria(categoria)}
-                                >
-                                  Editar
+                                <Button variant="outline-primary" size="sm" onClick={() => handleShowEditProduto(produto)} className="me-2">
+                                  <i className="bi bi-pencil-square"></i> Editar
                                 </Button>
-                                <Button 
-                                  variant="outline-danger" 
-                                  size="sm"
-                                  onClick={() => handleShowDeleteCategoria(categoria)}
-                                >
-                                  Excluir
+                                <Button variant="outline-danger" size="sm" onClick={() => handleShowDeleteProduto(produto)}>
+                                  <i className="bi bi-trash"></i> Excluir
                                 </Button>
                               </td>
                             </tr>
@@ -202,116 +251,107 @@ const Gerente = () => {
               </Row>
             </Tab>
 
-            <Tab eventKey="usuarios" title="Visualização de Usuários">
+            <Tab eventKey="usuarios" title="Gerenciamento de Usuários">
               <Row>
-                <Col lg={6} className="mb-4">
-                  <Card className="shadow-sm h-100">
-                    <Card.Header className="bg-white">
-                      <h5 className="mb-0 fw-bold">Distribuição por Nível de Acesso</h5>
-                    </Card.Header>
-                    <Card.Body className="d-flex align-items-center justify-content-center">
-                      <ResponsiveContainer width="100%" height={300}>
-                        <PieChart>
-                          <Pie
-                            data={roleData}
-                            cx="50%"
-                            cy="50%"
-                            labelLine={true}
-                            label={({name, percent}) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            dataKey="value"
-                          >
-                            {roleData.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                          </Pie>
-                          <Tooltip formatter={(value) => [`${value} usuário(s)`, 'Quantidade']} />
-                          <Legend />
-                        </PieChart>
-                      </ResponsiveContainer>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                
-                <Col lg={6} className="mb-4">
-                  <Card className="shadow-sm h-100">
-                    <Card.Header className="bg-white">
-                      <h5 className="mb-0 fw-bold">Status de Atividade</h5>
-                    </Card.Header>
-                    <Card.Body className="d-flex align-items-center justify-content-center">
-                      <ResponsiveContainer width="100%" height={300}>
-                        <PieChart>
-                          <Pie
-                            data={statusData}
-                            cx="50%"
-                            cy="50%"
-                            labelLine={true}
-                            label={({name, percent}) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            dataKey="value"
-                          >
-                            <Cell fill="#4CAF50" />
-                            <Cell fill="#9E9E9E" />
-                          </Pie>
-                          <Tooltip formatter={(value) => [`${value} usuário(s)`, 'Quantidade']} />
-                          <Legend />
-                        </PieChart>
-                      </ResponsiveContainer>
-                    </Card.Body>
-                  </Card>
+
+                <Col lg={12} className="mb-4">
+                  <Row>
+                    <Col md={4} className="mb-3">
+                      <Card className="shadow-sm text-center border-start border-primary border-4">
+                        <Card.Body>
+                          <h3 className="text-primary mb-1">{usuarios.length}</h3>
+                          <p className="text-muted mb-0">Total de Usuários</p>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                    <Col md={4} className="mb-3">
+                      <Card className="shadow-sm text-center border-start border-success border-4">
+                        <Card.Body>
+                          <h3 className="text-success mb-1">
+                            {usuarios.filter(u => u.status === 'Online' || u.status === 'online').length}
+                          </h3>
+                          <p className="text-muted mb-0">Usuários Online</p>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                    <Col md={4} className="mb-3">
+                      <Card className="shadow-sm text-center border-start border-warning border-4">
+                        <Card.Body>
+                          <h3 className="text-warning mb-1">
+                            {usuarios.filter(u => u.role === 'Admin' || u.role === 'admin').length}
+                          </h3>
+                          <p className="text-muted mb-0">Administradores</p>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  </Row>
                 </Col>
 
                 <Col lg={12}>
                   <Card className="shadow-sm">
                     <Card.Header className="bg-white d-flex justify-content-between align-items-center">
-                      <h5 className="mb-0 fw-bold">Lista de Usuários</h5>
-                      <Form.Control
-                        type="search"
-                        placeholder="Buscar usuário..."
-                        className="w-auto"
-                      />
+                      <h5 className="mb-0 fw-bold">
+                        <i className="bi bi-people me-2"></i>Lista de Usuários
+                      </h5>
+                      <div>
+                      </div>
                     </Card.Header>
                     <Card.Body>
                       <Table responsive hover className="usuario-table">
-                        <thead>
+                        <thead className="table-light">
                           <tr>
-                            <th>#</th>
+                            <th style={{width: '60px'}}>#</th>
+                            <th>Avatar</th>
                             <th>Nome</th>
                             <th>Email</th>
-                            <th>Nível de Acesso</th>
-                            <th>Último Acesso</th>
+                            <th>Função</th>
                             <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {usuarios.map((usuario) => (
-                            <tr key={usuario.id}>
-                              <td>{usuario.id}</td>
-                              <td>{usuario.nome}</td>
-                              <td>{usuario.email}</td>
-                              <td>
-                                <Badge 
-                                  bg={
-                                    usuario.role === 'Admin' ? 'danger' : 
-                                    usuario.role === 'Gerente' ? 'warning' : 
-                                    usuario.role === 'Vendedor' ? 'info' : 'secondary'
-                                  }
-                                >
-                                  {usuario.role}
-                                </Badge>
-                              </td>
-                              <td>{usuario.ultimoAcesso}</td>
-                              <td>
-                                <Badge 
-                                  bg={usuario.status === 'Online' ? 'success' : 'secondary'}
-                                >
-                                  {usuario.status}
-                                </Badge>
+                          {usuarios.length > 0 ? (
+                            usuarios.map((user, index) => (
+                              <tr key={user.id || index}>
+                                <td className="fw-bold text-muted">#{user.id || index + 1}</td>
+                                <td>
+                                  <div className="bg-secondary rounded-circle d-inline-flex align-items-center justify-content-center text-white" 
+                                       style={{width: '40px', height: '40px', fontSize: '0.9rem'}}>
+                                    {user.username ? user.username.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'U'}
+                                  </div>
+                                </td>
+                                <td>
+                                  <div className="fw-bold">{user.username || 'Nome não informado'}</div>
+                                  <small className="text-muted">ID: {user.id || 'N/A'}</small>
+                                </td>
+                                <td>
+                                  <span className="text-muted">{user.email || 'Email não informado'}</span>
+                                </td>
+                                <td>
+                                  <Badge bg={getRoleBadgeColor(user.role)}>
+                                    {user.role || 'Usuário'}
+                                  </Badge>
+                                </td>
+                                <td>
+                                  <Badge bg={getStatusBadgeColor(user.status)}>
+                                    <i className="bi bi-circle-fill me-1" style={{fontSize: '0.5rem'}}></i>
+                                    {user.status || 'Offline'}
+                                  </Badge>
+                                </td>
+                              </tr>
+                            ))
+                          ) : (
+                            <tr>
+                              <td colSpan="6" className="text-center py-4">
+                                <div className="text-muted">
+                                  <i className="bi bi-person-x-fill fs-1 d-block mb-2"></i>
+                                  <p>Nenhum usuário encontrado</p>
+                                  <Button variant="primary" size="sm">
+                                    <i className="bi bi-person-plus me-1"></i>Adicionar Primeiro Usuário
+                                  </Button>
+                                </div>
                               </td>
                             </tr>
-                          ))}
+                          )}
                         </tbody>
                       </Table>
                     </Card.Body>
@@ -322,115 +362,144 @@ const Gerente = () => {
           </Tabs>
         </Container>
       </section>
-      <Modal show={showAddCategoria} onHide={handleCloseAddCategoria}>
+      <Modal show={showAddProduto} onHide={handleCloseAddProduto}>
         <Modal.Header closeButton>
-          <Modal.Title>Adicionar Nova Categoria</Modal.Title>
+          <Modal.Title>Novo Produto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-2">
               <Form.Label>Nome</Form.Label>
               <Form.Control 
                 type="text" 
-                placeholder="Nome da categoria"
-                value={newCategoria.nome}
-                onChange={(e) => setNewCategoria({...newCategoria, nome: e.target.value})}
+                value={newProduto.nome}
+                onChange={e => setNewProduto({...newProduto, nome: e.target.value})}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-2">
+              <Form.Label>Preço</Form.Label>
+              <Form.Control 
+                type="number" 
+                step="0.01"
+                value={newProduto.preco}
+                onChange={e => setNewProduto({...newProduto, preco: parseFloat(e.target.value)})}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Imagem (URL)</Form.Label>
+              <Form.Control 
+                type="text" 
+                value={newProduto.imagem}
+                onChange={e => setNewProduto({...newProduto, imagem: e.target.value})}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Categoria</Form.Label>
+              <Form.Control 
+                type="text" 
+                value={newProduto.categoria}
+                onChange={e => setNewProduto({...newProduto, categoria: e.target.value})}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Check 
+                type="checkbox" 
+                label="Destaque" 
+                checked={newProduto.destaque} 
+                onChange={e => setNewProduto({...newProduto, destaque: e.target.checked})} 
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
               <Form.Label>Descrição</Form.Label>
               <Form.Control 
                 as="textarea" 
                 rows={3} 
-                placeholder="Descrição da categoria"
-                value={newCategoria.descricao}
-                onChange={(e) => setNewCategoria({...newCategoria, descricao: e.target.value})}
+                value={newProduto.descricao}
+                onChange={e => setNewProduto({...newProduto, descricao: e.target.value})}
               />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
-              <Form.Select
-                value={newCategoria.status}
-                onChange={(e) => setNewCategoria({...newCategoria, status: e.target.value})}
-              >
-                <option value="Ativo">Ativo</option>
-                <option value="Inativo">Inativo</option>
-              </Form.Select>
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseAddCategoria}>
-            Cancelar
-          </Button>
-          <Button variant="primary" onClick={handleAddCategoria}>
-            Adicionar Categoria
-          </Button>
+          <Button variant="secondary" onClick={handleCloseAddProduto}>Cancelar</Button>
+          <Button variant="primary" onClick={handleAddProduto}>Salvar</Button>
         </Modal.Footer>
       </Modal>
 
-      <Modal show={showEditCategoria} onHide={handleCloseEditCategoria}>
+      <Modal show={showEditProduto} onHide={handleCloseEditProduto}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar Categoria</Modal.Title>
+          <Modal.Title>Editar Produto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-2">
               <Form.Label>Nome</Form.Label>
               <Form.Control 
                 type="text" 
-                placeholder="Nome da categoria"
-                value={currentCategoria.nome || ''}
-                onChange={(e) => setCurrentCategoria({...currentCategoria, nome: e.target.value})}
+                value={currentProduto.nome || ''}
+                onChange={e => setCurrentProduto({...currentProduto, nome: e.target.value})}
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-2">
+              <Form.Label>Preço</Form.Label>
+              <Form.Control 
+                type="number" 
+                step="0.01"
+                value={currentProduto.preco || 0}
+                onChange={e => setCurrentProduto({...currentProduto, preco: parseFloat(e.target.value)})}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Imagem (URL)</Form.Label>
+              <Form.Control 
+                type="text" 
+                value={currentProduto.imagem || ''}
+                onChange={e => setCurrentProduto({...currentProduto, imagem: e.target.value})}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Categoria</Form.Label>
+              <Form.Control 
+                type="text" 
+                value={currentProduto.categoria || ''}
+                onChange={e => setCurrentProduto({...currentProduto, categoria: e.target.value})}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Check 
+                type="checkbox" 
+                label="Destaque" 
+                checked={currentProduto.destaque || false} 
+                onChange={e => setCurrentProduto({...currentProduto, destaque: e.target.checked})} 
+              />
+            </Form.Group>
+            <Form.Group className="mb-2">
               <Form.Label>Descrição</Form.Label>
               <Form.Control 
                 as="textarea" 
                 rows={3} 
-                placeholder="Descrição da categoria"
-                value={currentCategoria.descricao || ''}
-                onChange={(e) => setCurrentCategoria({...currentCategoria, descricao: e.target.value})}
+                value={currentProduto.descricao || ''}
+                onChange={e => setCurrentProduto({...currentProduto, descricao: e.target.value})}
               />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
-              <Form.Select
-                value={currentCategoria.status || 'Ativo'}
-                onChange={(e) => setCurrentCategoria({...currentCategoria, status: e.target.value})}
-              >
-                <option value="Ativo">Ativo</option>
-                <option value="Inativo">Inativo</option>
-              </Form.Select>
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseEditCategoria}>
-            Cancelar
-          </Button>
-          <Button variant="primary" onClick={handleEditCategoria}>
-            Salvar Alterações
-          </Button>
+          <Button variant="secondary" onClick={handleCloseEditProduto}>Cancelar</Button>
+          <Button variant="primary" onClick={handleEditProduto}>Salvar</Button>
         </Modal.Footer>
       </Modal>
 
-      <Modal show={showDeleteCategoria} onHide={handleCloseDeleteCategoria}>
+      <Modal show={showDeleteProduto} onHide={handleCloseDeleteProduto}>
         <Modal.Header closeButton>
           <Modal.Title>Confirmar Exclusão</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Tem certeza que deseja excluir a categoria <strong>{currentCategoria.nome}</strong>?</p>
-          <p className="text-danger">Esta ação não pode ser desfeita.</p>
+          Tem certeza que deseja deletar o produto <strong>{currentProduto.nome}</strong>?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseDeleteCategoria}>
-            Cancelar
-          </Button>
-          <Button variant="danger" onClick={handleDeleteCategoria}>
-            Excluir
-          </Button>
+          <Button variant="secondary" onClick={handleCloseDeleteProduto}>Cancelar</Button>
+          <Button variant="danger" onClick={handleDeleteProduto}>Excluir</Button>
         </Modal.Footer>
       </Modal>
     </>

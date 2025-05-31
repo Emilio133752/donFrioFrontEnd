@@ -16,7 +16,7 @@ const SobreNos = () => {
                   Uma empresa com tradição e qualidade no mercado há mais de 20 anos, 
                   oferecendo soluções em refrigeração com excelência e compromisso.
                 </p>
-              <Button variant="outline-light" size="lg" className="rounded-pill px-4">
+              <Button variant="outline-light" href='http://localhost:5173/produtos' size="lg" className="rounded-pill px-4">
                   Conheça nossos produtos
                 </Button>
               </div>
@@ -152,7 +152,6 @@ const SobreNos = () => {
         </Container>
       </section>
 
-      {/* Social Media Section */}
       <section className="py-5">
         <Container>
           <Row className="justify-content-center mb-5">
