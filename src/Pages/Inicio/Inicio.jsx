@@ -10,7 +10,7 @@ const Inicio = () => {
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/produtos');
+        const response = await axios.get('https://donfriobackend.onrender.com/api/produtos');
         const todosProdutos = response.data;
         const produtosAleatorios = todosProdutos
           .sort(() => 0.5 - Math.random())

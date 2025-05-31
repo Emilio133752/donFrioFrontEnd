@@ -4,8 +4,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Gerente.css';
 
-const API_URL = 'http://localhost:5000/api/produtos';
-const USUARIOS_API_URL = 'http://localhost:5000/api/auth/usuarios';
+const API_URL = 'https://donfriobackend.onrender.com/api/produtos';
+const USUARIOS_API_URL = 'https://donfriobackend.onrender.com/api/auth/usuarios';
 
 const Gerente = () => {
 

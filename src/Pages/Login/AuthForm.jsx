@@ -32,7 +32,7 @@ export default function AuthForm() {
 
     try {
       if (key === 'login') {
-        const response = await axios.post('http://localhost:5000/api/auth/login', {
+        const response = await axios.post('https://donfriobackend.onrender.com/api/auth/login', {
           email: formData.email,
           password: formData.password,
         });
@@ -52,7 +52,7 @@ export default function AuthForm() {
       }
 
       if (key === 'register') {
-        const response = await axios.post('http://localhost:5000/api/auth/register', {
+        const response = await axios.post('https://donfriobackend.onrender.com/api/auth/register', {
           username: formData.name,
           email: formData.email,
           password: formData.password,

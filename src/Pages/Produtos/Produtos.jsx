@@ -14,7 +14,7 @@ const Produtos = () => {
   useEffect(() => {
     const fetchProdutos = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/produtos');
+        const response = await axios.get('https://donfriobackend.onrender.com/api/produtos');
         setProdutos(response.data);
       } catch (error) {
         console.error('Erro ao buscar produtos:', error);
