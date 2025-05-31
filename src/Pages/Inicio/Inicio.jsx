@@ -37,7 +37,7 @@ const Inicio = () => {
             </Col>
             <Col lg={6} className="text-center">
               <img 
-                src="/Images/logo.jpg" 
+                src="/public/Images/logo.jpg" 
                 alt="Produtos de refrigeração" 
                 className="img-fluid hero-image rounded shadow-lg"
               />
