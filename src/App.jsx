@@ -21,7 +21,7 @@ const NavigationBar = ({ user, setUser }) => {
   const checkUserAuth = () => {
     const token = localStorage.getItem('token');
     if (token) {
-      axios.get('http://localhost:5000/api/auth/me', {
+      axios.get('https://donfriobackend.onrender.com/api/auth/me', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
