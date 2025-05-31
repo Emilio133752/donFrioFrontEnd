@@ -37,7 +37,7 @@ const Inicio = () => {
             </Col>
             <Col lg={6} className="text-center">
               <img 
-                src="https://don-frio-front-end.vercel.app/public/Images/logo.jpg" 
+                src="Images/logo.JPG" 
                 alt="Produtos de refrigeração" 
                 className="img-fluid hero-image rounded shadow-lg"
               />
