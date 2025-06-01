@@ -299,7 +299,7 @@ const Gerente = () => {
                                 </td>
                                 <td>
                                   <div className="fw-bold">{user.username || 'Nome não informado'}</div>
-                                  <small className="text-muted">ID: {user.id || 'N/A'}</small>
+                                  <small className="text-muted">ID: {user._id || 'N/A'}</small>
                                 </td>
                                 <td>
                                   <span className="text-muted">{user.email || 'Email não informado'}</span>
