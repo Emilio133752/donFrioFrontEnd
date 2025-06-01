@@ -152,20 +152,20 @@ const Gerente = () => {
 
   return (
     <>
-      <section className="gerente-header py-4">
-        <Container>
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <div>
-              <h1 className="fw-bold">Painel de Gerenciamento</h1>
-              <p className="text-muted">Gerencie produtos e usuários do sistema</p>
-            </div>
-            <div className="dashboard-date">
-              <span className="fw-bold">Data: </span>
-              <span>10/05/2025</span>
-            </div>
-          </div>
-        </Container>
-      </section>
+  <section className="gerente-header py-4">
+    <Container>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h1 className="fw-bold">Painel de Gerenciamento</h1>
+          <p className="text-muted">Gerencie produtos e usuários do sistema</p>
+        </div>
+        <div className="dashboard-date">
+          <span className="fw-bold">Data: </span>
+          <span>{new Date().toLocaleDateString('pt-BR')}</span>
+        </div>
+      </div>
+    </Container>
+  </section>
 
       <section className="dashboard-content py-4">
         <Container>

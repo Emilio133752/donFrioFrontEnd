@@ -23,7 +23,7 @@ const SobreNos = () => {
             </Col>
             <Col lg={4} className="text-center">
               <Image 
-                src="/images/sobre-nos.jpg" 
+                src="/Images/sobre-nos.jpg" 
                 alt="Imagem de pessoas negociando" 
                 className="img-fluid rounded shadow-lg" 
                 style={{ maxHeight: '350px' }}
@@ -57,7 +57,7 @@ const SobreNos = () => {
                   <Row className="align-items-center">
                     <Col md={4} className="text-center mb-4 mb-md-0">
                       <Image 
-                        src="/images/ronildo.jpg" 
+                        src="/Images/ronildo.jpg" 
                         alt="Foto do representante" 
                         className="rounded-circle img-thumbnail shadow" 
                         width="150" 
@@ -175,7 +175,7 @@ const SobreNos = () => {
                   <div className="social-card p-4 border rounded shadow-sm bg-white">
                     <div className="d-flex align-items-center mb-3">
                       <Image 
-                        src="/images/instagram.png" 
+                        src="/Images/instagram.png" 
                         alt="Instagram" 
                         width="40" 
                         height="40" 
@@ -200,7 +200,7 @@ const SobreNos = () => {
                       <div className="social-link-card p-4 border rounded shadow-sm bg-white">
                         <div className="d-flex align-items-center">
                       <Image 
-                        src="/images/facebook.webp" 
+                        src="/Images/facebook.webp" 
                         alt="Facebook" 
                         width="50" 
                         height="50" 
@@ -219,7 +219,7 @@ const SobreNos = () => {
                       <div className="social-link-card p-4 border rounded shadow-sm bg-white">
                         <div className="d-flex align-items-center">
                       <Image 
-                        src="/images/youtube.avif" 
+                        src="/Images/youtube.avif" 
                         alt="Youtube" 
                         width="50" 
                         height="50" 
@@ -237,7 +237,7 @@ const SobreNos = () => {
                       <div className="social-link-card p-4 border rounded shadow-sm bg-white">
                         <div className="d-flex align-items-center">
                       <Image 
-                        src="/images/linkedin.avif" 
+                        src="/Images/linkedin.avif" 
                         alt="Linkedin" 
                         width="50" 
                         height="50" 

@@ -48,7 +48,7 @@ const Produtos = () => {
             </Col>
             <Col lg={5} className="d-none d-lg-block">
               <img 
-                src="/images/produtos-refrigeracao.webp" 
+                src="/Images/produtos-refrigeracao.webp" 
                 alt="Produtos de refrigeração" 
                 className="img-fluid rounded shadow-lg" 
               />
