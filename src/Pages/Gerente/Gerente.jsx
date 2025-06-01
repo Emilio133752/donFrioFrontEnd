@@ -253,10 +253,9 @@ const Gerente = () => {
 
             <Tab eventKey="usuarios" title="Gerenciamento de Usuários">
               <Row>
-
-                <Col lg={12} className="mb-4">
+                <Col lg={12} className="mb-3">
                   <Row>
-                    <Col md={4} className="mb-3">
+                    <Col md={12} className="mb-3">
                       <Card className="shadow-sm text-center border-start border-primary border-4">
                         <Card.Body>
                           <h3 className="text-primary mb-1">{usuarios.length}</h3>
@@ -285,7 +284,6 @@ const Gerente = () => {
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Função</th>
-                            <th>Status</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -309,12 +307,6 @@ const Gerente = () => {
                                 <td>
                                   <Badge bg={getRoleBadgeColor(user.role)}>
                                     {user.role || 'Usuário'}
-                                  </Badge>
-                                </td>
-                                <td>
-                                  <Badge bg={getStatusBadgeColor(user.status)}>
-                                    <i className="bi bi-circle-fill me-1" style={{fontSize: '0.5rem'}}></i>
-                                    {user.status || 'Offline'}
                                   </Badge>
                                 </td>
                               </tr>
