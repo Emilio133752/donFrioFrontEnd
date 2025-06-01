@@ -155,7 +155,7 @@ const Inicio = () => {
                   <Card.Body className="p-4">
                     <div className="d-flex mb-4">
                       <div className="testimonial-img me-3">
-                        <img src="/images/casal-feedback.jpeg" alt="Cliente satisfeito" className="rounded-circle" />
+                        <img src="/Images/casal-feedback.jpeg" alt="Cliente satisfeito" className="rounded-circle" />
                       </div>
                       <div>
                         <h5 className="fw-bold mb-1">João e Maria Silva</h5>
@@ -179,7 +179,7 @@ const Inicio = () => {
                   <Card.Body className="p-4">
                     <div className="d-flex mb-4">
                       <div className="testimonial-img me-3">
-                        <img src="/images/tecnico-feedback.avif" alt="Técnico de conserto" className="rounded-circle" />
+                        <img src="/Images/tecnico-feedback.avif" alt="Técnico de conserto" className="rounded-circle" />
                       </div>
                       <div>
                         <h5 className="fw-bold mb-1">Ricardo Oliveira</h5>

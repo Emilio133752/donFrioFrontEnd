@@ -11,18 +11,20 @@ const Produtos = () => {
   const [termoBusca, setTermoBusca] = useState('');
 
 
-  useEffect(() => {
-    const fetchProdutos = async () => {
-      try {
-        const response = await axios.get('https://donfriobackend.onrender.com/api/produtos');
-        setProdutos(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar produtos:', error);
-      }
-    };
+useEffect(() => {
+  const fetchProdutos = async () => {
+    try {
+      const response = await axios.get('https://donfriobackend.onrender.com/api/produtos');
+      console.log('Produtos recebidos da API:', response.data);
+      setProdutos(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar produtos:', error);
+    }
+  };
 
-    fetchProdutos();
-  }, []);
+  fetchProdutos();
+}, []);
+
 
   const produtosFiltrados = produtos.filter(produto => {
     const matchCategoria = categoriaAtiva === 'todos' || produto.categoria === categoriaAtiva;
@@ -48,7 +50,7 @@ const Produtos = () => {
             </Col>
             <Col lg={5} className="d-none d-lg-block">
               <img 
-                src="/images/produtos-refrigeracao.webp" 
+                src="/Images/produtos-refrigeracao.webp" 
                 alt="Produtos de refrigeração" 
                 className="img-fluid rounded shadow-lg" 
               />

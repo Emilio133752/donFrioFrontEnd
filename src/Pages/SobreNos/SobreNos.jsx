@@ -23,7 +23,7 @@ const SobreNos = () => {
             </Col>
             <Col lg={4} className="text-center">
               <Image 
-                src="/images/sobre-nos.jpg" 
+                src="/Images/sobre-nos.jpg" 
                 alt="Imagem de pessoas negociando" 
                 className="img-fluid rounded shadow-lg" 
                 style={{ maxHeight: '350px' }}
@@ -57,7 +57,7 @@ const SobreNos = () => {
                   <Row className="align-items-center">
                     <Col md={4} className="text-center mb-4 mb-md-0">
                       <Image 
-                        src="/images/ronildo.jpg" 
+                        src="/Images/ronildo.jpg" 
                         alt="Foto do representante" 
                         className="rounded-circle img-thumbnail shadow" 
                         width="150" 
@@ -71,14 +71,30 @@ const SobreNos = () => {
                         "Trabalhamos para oferecer os melhores produtos de refrigeração do mercado, 
                         sempre priorizando a satisfação dos nossos clientes e o respeito ao meio ambiente."
                       </p>
-                      <div className="d-flex gap-2">
+                    <div className="d-flex gap-2">
+                      <a
+                        href="https://www.linkedin.com/in/seu-usuario/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
                         <Button variant="outline-primary" size="sm">
                           <i className="bi bi-linkedin me-1"></i> LinkedIn
                         </Button>
+                      </a>
+
+                      <a
+                        href="https://wa.me" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
                         <Button variant="outline-primary" size="sm">
                           <i className="bi bi-envelope me-1"></i> Contato
                         </Button>
-                      </div>
+                      </a>
+                    </div>
+
                     </Col>
                   </Row>
                 </Card.Body>
@@ -175,7 +191,7 @@ const SobreNos = () => {
                   <div className="social-card p-4 border rounded shadow-sm bg-white">
                     <div className="d-flex align-items-center mb-3">
                       <Image 
-                        src="/images/instagram.png" 
+                        src="/Images/instagram.png" 
                         alt="Instagram" 
                         width="40" 
                         height="40" 
@@ -188,9 +204,16 @@ const SobreNos = () => {
                       Novos produtos chegando em nossa loja! Confira as promoções especiais
                       de lançamento e aproveite para renovar seu sistema de refrigeração.
                     </p>
-                    <Button variant="outline-primary" className="w-100">
-                      <i className="bi bi-instagram me-2"></i> Seguir no Instagram
-                    </Button>
+                      <a
+                        href="https://www.instagram.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button variant="outline-primary" className="w-100">
+                          <i className="bi bi-instagram me-2"></i> Seguir no Instagram
+                        </Button>
+                      </a>
                   </div>
                 </Col>
                 
@@ -200,7 +223,7 @@ const SobreNos = () => {
                       <div className="social-link-card p-4 border rounded shadow-sm bg-white">
                         <div className="d-flex align-items-center">
                       <Image 
-                        src="/images/facebook.webp" 
+                        src="/Images/facebook.webp" 
                         alt="Facebook" 
                         width="50" 
                         height="50" 
@@ -219,7 +242,7 @@ const SobreNos = () => {
                       <div className="social-link-card p-4 border rounded shadow-sm bg-white">
                         <div className="d-flex align-items-center">
                       <Image 
-                        src="/images/youtube.avif" 
+                        src="/Images/youtube.avif" 
                         alt="Youtube" 
                         width="50" 
                         height="50" 
@@ -237,7 +260,7 @@ const SobreNos = () => {
                       <div className="social-link-card p-4 border rounded shadow-sm bg-white">
                         <div className="d-flex align-items-center">
                       <Image 
-                        src="/images/linkedin.avif" 
+                        src="/Images/linkedin.avif" 
                         alt="Linkedin" 
                         width="50" 
                         height="50" 
