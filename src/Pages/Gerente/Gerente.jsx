@@ -264,26 +264,6 @@ const Gerente = () => {
                         </Card.Body>
                       </Card>
                     </Col>
-                    <Col md={4} className="mb-3">
-                      <Card className="shadow-sm text-center border-start border-success border-4">
-                        <Card.Body>
-                          <h3 className="text-success mb-1">
-                            {usuarios.filter(u => u.status === 'Online' || u.status === 'online').length}
-                          </h3>
-                          <p className="text-muted mb-0">Usuários Online</p>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col md={4} className="mb-3">
-                      <Card className="shadow-sm text-center border-start border-warning border-4">
-                        <Card.Body>
-                          <h3 className="text-warning mb-1">
-                            {usuarios.filter(u => u.role === 'Admin' || u.role === 'admin').length}
-                          </h3>
-                          <p className="text-muted mb-0">Administradores</p>
-                        </Card.Body>
-                      </Card>
-                    </Col>
                   </Row>
                 </Col>
 
