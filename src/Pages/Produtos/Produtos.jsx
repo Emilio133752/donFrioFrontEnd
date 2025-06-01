@@ -88,7 +88,7 @@ useEffect(() => {
                 <Card.Body>
                   <h6 className="mb-3">Categorias</h6>
                   <div className="d-flex flex-column">
-                    {['todos', 'ar-condicionado', 'ventiladores', 'climatizadores', 'comercial'].map(cat => (
+                    {['todos', 'Ar Condicionado', 'Ventiladores', 'Climatizadores', 'Linha Comercial'].map(cat => (
                       <Button 
                         key={cat}
                         variant={categoriaAtiva === cat ? 'primary' : 'outline-primary'} 
@@ -96,10 +96,10 @@ useEffect(() => {
                         onClick={() => setCategoriaAtiva(cat)}
                       >
                         {cat === 'todos' && 'Todos os produtos'}
-                        {cat === 'ar-condicionado' && 'Ar Condicionado'}
-                        {cat === 'ventiladores' && 'Ventiladores'}
-                        {cat === 'climatizadores' && 'Climatizadores'}
-                        {cat === 'comercial' && 'Linha Comercial'}
+                        {cat === 'Ar Condicionado' && 'Ar Condicionado'}
+                        {cat === 'Ventiladores' && 'Ventiladores'}
+                        {cat === 'Climatizadores' && 'Climatizadores'}
+                        {cat === 'Linha Comercial' && 'Linha Comercial'}
                       </Button>
                     ))}
                   </div>

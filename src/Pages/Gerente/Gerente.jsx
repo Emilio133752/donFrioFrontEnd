@@ -25,6 +25,13 @@ const Gerente = () => {
     descricao: ''
   });
 
+  const categorias = [
+    'Ar Condicionado',
+    'Ventiladores',
+    'Climatizadores',
+    'Linha Comercial'
+  ];
+
   const fetchProdutos = async () => {
     try {
       const response = await fetch(API_URL);
@@ -367,11 +374,15 @@ const Gerente = () => {
             </Form.Group>
             <Form.Group className="mb-2">
               <Form.Label>Categoria</Form.Label>
-              <Form.Control 
-                type="text" 
+              <Form.Select 
                 value={newProduto.categoria}
                 onChange={e => setNewProduto({...newProduto, categoria: e.target.value})}
-              />
+              >
+                <option value="">Selecione uma categoria</option>
+                {categorias.map(categoria => (
+                  <option key={categoria} value={categoria}>{categoria}</option>
+                ))}
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-2">
               <Form.Check 
@@ -431,11 +442,15 @@ const Gerente = () => {
             </Form.Group>
             <Form.Group className="mb-2">
               <Form.Label>Categoria</Form.Label>
-              <Form.Control 
-                type="text" 
+              <Form.Select 
                 value={currentProduto.categoria || ''}
                 onChange={e => setCurrentProduto({...currentProduto, categoria: e.target.value})}
-              />
+              >
+                <option value="">Selecione uma categoria</option>
+                {categorias.map(categoria => (
+                  <option key={categoria} value={categoria}>{categoria}</option>
+                ))}
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-2">
               <Form.Check 

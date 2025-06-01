@@ -318,12 +318,6 @@ const SobreNos = () => {
               <p className="text-muted mb-4">
                 Inscreva-se em nossa newsletter para receber novidades e promoções especiais.
               </p>
-              <div className="input-group mb-3">
-                <input type="email" className="form-control" placeholder="Seu e-mail" />
-                <Button variant="primary">
-                  <i className="bi bi-send"></i>
-                </Button>
-              </div>
               <div className="d-flex gap-3 mt-4">
                 <a href="#" className="text-primary fs-5"><i className="bi bi-facebook"></i></a>
                 <a href="#" className="text-primary fs-5"><i className="bi bi-instagram"></i></a>
