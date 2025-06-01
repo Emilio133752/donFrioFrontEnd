@@ -69,7 +69,7 @@ const Inicio = () => {
                       <small className="text-muted">A partir de</small>
                       <div className="price mb-3">R$ {parseFloat(produto.preco).toFixed(2)}</div>
                     </Card.Text>
-                    <Button variant="primary" className="px-4 rounded-pill" href='https://don-frio-front-end.vercel.app/sobre-nos'>Ver detalhes</Button>
+                    <Button variant="primary" className="px-4 rounded-pill" href='../Pages/Produtos/Produtos'>Ver detalhes</Button>
                   </Card.Body>
                 </Card>
               </Col>
