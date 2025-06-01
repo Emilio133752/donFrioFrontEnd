@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Inicio.css';
@@ -69,7 +70,9 @@ const Inicio = () => {
                       <small className="text-muted">A partir de</small>
                       <div className="price mb-3">R$ {parseFloat(produto.preco).toFixed(2)}</div>
                     </Card.Text>
-                    <Button variant="primary" className="px-4 rounded-pill" href='/Pages/Produtos/Produtos'>Ver detalhes</Button>
+                    <Link to="/produtos">
+                      <Button variant="primary" className="px-4 rounded-pill">Ver detalhes</Button>
+                    </Link>
                   </Card.Body>
                 </Card>
               </Col>
