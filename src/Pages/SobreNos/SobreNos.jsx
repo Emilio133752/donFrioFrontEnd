@@ -71,14 +71,30 @@ const SobreNos = () => {
                         "Trabalhamos para oferecer os melhores produtos de refrigeração do mercado, 
                         sempre priorizando a satisfação dos nossos clientes e o respeito ao meio ambiente."
                       </p>
-                      <div className="d-flex gap-2">
+                    <div className="d-flex gap-2">
+                      <a
+                        href="https://www.linkedin.com/in/seu-usuario/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
                         <Button variant="outline-primary" size="sm">
                           <i className="bi bi-linkedin me-1"></i> LinkedIn
                         </Button>
+                      </a>
+
+                      <a
+                        href="https://wa.me" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
                         <Button variant="outline-primary" size="sm">
                           <i className="bi bi-envelope me-1"></i> Contato
                         </Button>
-                      </div>
+                      </a>
+                    </div>
+
                     </Col>
                   </Row>
                 </Card.Body>
@@ -188,9 +204,16 @@ const SobreNos = () => {
                       Novos produtos chegando em nossa loja! Confira as promoções especiais
                       de lançamento e aproveite para renovar seu sistema de refrigeração.
                     </p>
-                    <Button variant="outline-primary" className="w-100">
-                      <i className="bi bi-instagram me-2"></i> Seguir no Instagram
-                    </Button>
+                      <a
+                        href="https://www.instagram.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <Button variant="outline-primary" className="w-100">
+                          <i className="bi bi-instagram me-2"></i> Seguir no Instagram
+                        </Button>
+                      </a>
                   </div>
                 </Col>
                 
