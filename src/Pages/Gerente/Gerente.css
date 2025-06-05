@@ -35,6 +35,7 @@
 .badge {
   font-weight: 500;
   padding: 0.35em 0.65em;
+  border-radius: 0.25rem;
 }
 
 .feature-icon {
@@ -52,6 +53,7 @@
   font-size: 1.25rem;
   color: #0d6efd;
 }
+
 .nav-tabs {
   border-bottom: 2px solid #dee2e6;
 }
@@ -62,6 +64,7 @@
   font-weight: 500;
   padding: 0.75rem 1rem;
   margin-right: 0.5rem;
+  transition: color 0.2s ease;
 }
 
 .nav-tabs .nav-link:hover {
@@ -76,13 +79,16 @@
   margin-bottom: -2px;
 }
 
-.modal-header {
+.modal-header,
+.modal-footer {
   background-color: #f8f9fa;
+}
+
+.modal-header {
   border-bottom: 1px solid #e9ecef;
 }
 
 .modal-footer {
-  background-color: #f8f9fa;
   border-top: 1px solid #e9ecef;
 }
 
@@ -94,21 +100,22 @@
   width: 50px;
   height: 50px;
   object-fit: cover;
+  border-radius: 50%;
 }
 
 @media (max-width: 768px) {
   .dashboard-date {
     margin-top: 1rem;
   }
-  
+
   .recharts-wrapper {
     font-size: 12px;
   }
-  
+
   h1 {
     font-size: 1.75rem;
   }
-  
+
   h5 {
     font-size: 1.1rem;
   }
