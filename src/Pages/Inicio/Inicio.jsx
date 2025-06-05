@@ -26,7 +26,6 @@ const Inicio = () => {
     fetchProdutos();
   }, []);
 
-
   return (
     <>
       <section className="hero-section">
@@ -80,6 +79,7 @@ const Inicio = () => {
           </Row>
         </Container>
       </section>
+
       <section className="why-us py-5">
         <Container>
           <div className="section-header text-center mb-5">
@@ -87,7 +87,7 @@ const Inicio = () => {
             <p className="text-muted mt-2">5 motivos para escolher nossos produtos</p>
           </div>
 
-          <Row className="g-4">
+          <Row className="g-4 mb-4">
             <Col md={4}>
               <div className="feature-box text-center p-4 h-100">
                 <div className="feature-icon mx-auto mb-4">
@@ -117,40 +117,39 @@ const Inicio = () => {
                 <p className="text-muted mb-0">Atendimento especializado para tirar todas as suas dúvidas</p>
               </div>
             </Col>
+          </Row>
 
-            <Row className="g-4 justify-content-center">
-              <Col md={4}>
-                <div className="feature-box text-center p-4 h-100">
-                  <div className="feature-icon mx-auto mb-4">
-                    <span className="number">4</span>
-                  </div>
-                  <h4 className="mb-3">Qualidade certificada</h4>
-                  <p className="text-muted mb-0">Trabalhamos com produtos testados e aprovados, garantindo segurança e durabilidade.</p>
+          <Row className="g-4 justify-content-center">
+            <Col md={4}>
+              <div className="feature-box text-center p-4 h-100">
+                <div className="feature-icon mx-auto mb-4">
+                  <span className="number">4</span>
                 </div>
-              </Col>
+                <h4 className="mb-3">Qualidade certificada</h4>
+                <p className="text-muted mb-0">Trabalhamos com produtos testados e aprovados, garantindo segurança e durabilidade.</p>
+              </div>
+            </Col>
 
-              <Col md={4}>
-                <div className="feature-box text-center p-4 h-100">
-                  <div className="feature-icon mx-auto mb-4">
-                    <span className="number">5</span>
-                  </div>
-                  <h4 className="mb-3">Pagamento facilitado</h4>
-                  <p className="text-muted mb-0">Aceitamos diversas formas de pagamento com possibilidade de parcelamento sem juros.</p>
+            <Col md={4}>
+              <div className="feature-box text-center p-4 h-100">
+                <div className="feature-icon mx-auto mb-4">
+                  <span className="number">5</span>
                 </div>
-              </Col>
-            </Row>
-
-
+                <h4 className="mb-3">Pagamento facilitado</h4>
+                <p className="text-muted mb-0">Aceitamos diversas formas de pagamento com possibilidade de parcelamento sem juros.</p>
+              </div>
+            </Col>
           </Row>
         </Container>
       </section>
+
 
       <section className="feedback">
         <Container>
           <div className="section-header text-center mb-5">
             <h2 className="fw-bold position-relative d-inline-block pb-2">Feedback</h2>
           </div>
-          
+
           <div className="feedback-container">
             <Row className="g-4">
               <Col lg={6} className="mb-4">
@@ -210,7 +209,9 @@ const Inicio = () => {
           <div className="installers-box text-center p-5 rounded">
             <h2 className="fw-bold mb-3">Se interesse por instalações</h2>
             <p className="lead mb-4">Profissionais qualificados para instalar seu equipamento com segurança e garantia</p>
-            <Button variant="light" size="lg" className="fw-bold px-4" href='https://web.whatsapp.com/'>Saiba mais</Button>
+            <a href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">
+              <Button variant="light" size="lg" className="fw-bold px-4">Saiba mais</Button>
+            </a>
           </div>
         </Container>
       </section>
@@ -223,19 +224,19 @@ const Inicio = () => {
               <p className="mb-1">EMPRESA - REFRIGERAÇÃO LTDA</p>
               <p className="text-muted">CNPJ: 00.000.000/0001-00</p>
             </Col>
-            
+
             <Col lg={3} md={6} className="mb-4 mb-lg-0">
               <h5 className="fw-bold mb-3">Endereço</h5>
               <p className="mb-1">Av. Principal, 1000</p>
               <p className="text-muted">Centro - Cidade/UF</p>
             </Col>
-            
+
             <Col lg={3} md={6} className="mb-4 mb-lg-0">
               <h5 className="fw-bold mb-3">Suporte</h5>
               <p className="mb-1">suporte@empresa.com</p>
               <p className="text-muted">0800 123 4567</p>
             </Col>
-            
+
             <Col lg={3} md={6}>
               <h5 className="fw-bold mb-3">Legal</h5>
               <p className="mb-1">Termos de uso</p>

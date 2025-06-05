@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { Container, Navbar, Nav, Button } from 'react-bootstrap';
 import AuthForm from './Pages/Login/AuthForm';
 import Inicio from './Pages/Inicio/Inicio';
 import Produtos from './Pages/Produtos/Produtos';
-import Sobre from './Pages/SobreNos/SobreNos'
+import Sobre from './Pages/SobreNos/SobreNos';
 import Gerente from './Pages/Gerente/Gerente';
 import PrivateRoute from './Components/PrivateRoute';
 import axios from 'axios';
@@ -35,7 +35,7 @@ const NavigationBar = ({ user, setUser }) => {
         setUser(null);
       });
     } else {
-      setUser(null); 
+      setUser(null);
     }
   };
 
@@ -57,29 +57,34 @@ const NavigationBar = ({ user, setUser }) => {
     navigate('/login');
   };
 
+  const handleNavClick = (path) => {
+    navigate(path);
+  };
+
   return (
     <Navbar bg="light" expand="lg" className="navbar-grande">
-      <Container>
-        <Navbar.Brand href="/">DonFrio</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/">Início</Nav.Link>
-            <Nav.Link as={Link} to="/produtos">Produtos</Nav.Link>
-            <Nav.Link as={Link} to="/sobre-nos">Sobre</Nav.Link>
+      <Container className="d-flex flex-wrap align-items-center justify-content-between">
+        <Navbar.Brand as={Link} to="/">DonFrio</Navbar.Brand>
 
-            {user?.role === 'gerente' && (
-              <Nav.Link as={Link} to="/gerente">Gerência</Nav.Link>
-            )}
-            {!user ? (
-              <Button variant="primary" onClick={() => navigate('/login')}>Login</Button>
-            ) : (
-              <div className="d-flex align-items-center">
-                <Button variant="danger" onClick={handleLogout}>Logout</Button>
-              </div>
-            )}
-          </Nav>
-        </Navbar.Collapse>
+        <Nav className="ms-auto d-flex align-items-center gap-3 flex-wrap menu-sem-collapse">
+          <Nav.Link as={Link} to="/" onClick={() => handleNavClick('/')}>Início</Nav.Link>
+          <Nav.Link as={Link} to="/produtos" onClick={() => handleNavClick('/produtos')}>Produtos</Nav.Link>
+          <Nav.Link as={Link} to="/sobre-nos" onClick={() => handleNavClick('/sobre-nos')}>Sobre</Nav.Link>
+
+          {user?.role === 'gerente' && (
+            <Nav.Link as={Link} to="/gerente" onClick={() => handleNavClick('/gerente')}>Gerência</Nav.Link>
+          )}
+
+          {!user ? (
+            <Button variant="primary" onClick={() => handleNavClick('/login')}>
+              Login
+            </Button>
+          ) : (
+            <Button variant="danger" onClick={handleLogout}>
+              Logout
+            </Button>
+          )}
+        </Nav>
       </Container>
     </Navbar>
   );
@@ -91,17 +96,20 @@ function App() {
   return (
     <Router>
       <NavigationBar user={user} setUser={setUser} />
-      <Container>
+      <Container className="mt-4">
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/login" element={<AuthForm />} />
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/sobre-nos" element={<Sobre />} />
-          <Route path="/gerente" element={
-            <PrivateRoute user={user} allowedRoles={['gerente']}>
-              <Gerente />
-            </PrivateRoute>
-          }/>
+          <Route 
+            path="/gerente" 
+            element={
+              <PrivateRoute user={user} allowedRoles={['gerente']}>
+                <Gerente />
+              </PrivateRoute>
+            } 
+          />
         </Routes>
       </Container>
     </Router>

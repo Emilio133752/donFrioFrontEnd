@@ -6,14 +6,21 @@
   --light-color: #ffffff;
   --border-color: #e9ecef;
   --accent-color: #ffc107;
+  --hover-transform: 0.3s ease;
 }
 
-.produtos-hero  {
+.produtos-hero {
   background: var(--primary-color) !important;
   color: var(--light-color) !important;
   padding: 3rem 0;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  text-align: left;
 }
 
 .produtos-hero h1 {
@@ -21,28 +28,26 @@
   -webkit-text-fill-color: initial !important;
 }
 
-.produtos-hero::before {
+.produtos-hero::before, .produtos-hero::after {
   content: '';
   position: absolute;
-  top: -100px;
-  right: -100px;
-  width: 400px;
-  height: 400px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   z-index: 1;
 }
 
+.produtos-hero::before {
+  top: -100px;
+  right: -100px;
+  width: 400px;
+  height: 400px;
+}
+
 .produtos-hero::after {
-  content: '';
-  position: absolute;
   bottom: -100px;
   left: -100px;
   width: 300px;
   height: 300px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 1;
 }
 
 .produtos-hero .container {
@@ -52,34 +57,43 @@
 
 .hero-image {
   max-height: 250px;
+  width: 100%;
   object-fit: cover;
 }
 
+/* Responsividade */
+
 @media (max-width: 992px) {
-.produtos-hero {
-    padding: 2rem 0;
+  .produtos-hero {
+    padding: 2rem 1rem;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
 @media (max-width: 768px) {
   .hero-image {
-    max-height: 300px;
-  }
-  
-.produtos-hero {
-    text-align: center;
+    max-height: 220px;
   }
 }
 
 @media (max-width: 576px) {
   .produtos-hero {
-    padding: 2rem 0;
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-image {
+    max-height: 200px;
   }
 }
+
 
 .produto-card {
   transition: transform var(--hover-transform), box-shadow var(--hover-transform);
   position: relative;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .produto-card:hover {
@@ -94,6 +108,7 @@
 
 .produto-img {
   height: 220px;
+  width: 100%;
   object-fit: contain;
   padding: 16px;
   background-color: var(--secondary-color);
@@ -127,6 +142,20 @@
   z-index: 10;
 }
 
+
+@media (max-width: 767.98px) {
+  .produto-img {
+    height: 180px;
+  }
+  
+  .produto-overlay {
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+  }
+}
+
+/* Promoção */
+
 .promocao-card {
   position: relative;
   overflow: hidden;
@@ -134,10 +163,7 @@
 
 .promocao-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7));
   display: flex;
   align-items: flex-end;
@@ -147,6 +173,7 @@
 .promocao-card:hover .promocao-overlay {
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
 }
+
 
 .beneficio-item {
   transition: transform var(--hover-transform);
@@ -160,16 +187,12 @@
   background-color: rgba(13, 110, 253, 0.2);
 }
 
-@media (max-width: 767.98px) {
-  .produto-img {
-    height: 180px;
-  }
-  
-  .produto-overlay {
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.8);
-  }
+
+.btn-outline-primary:hover {
+  transform: translateX(5px);
+  transition: transform var(--hover-transform);
 }
+
 
 @keyframes fadeInUp {
   from {
@@ -180,9 +203,4 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.btn-outline-primary:hover {
-  transform: translateX(5px);
-  transition: transform var(--hover-transform);
 }
