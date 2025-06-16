@@ -48,7 +48,7 @@ useEffect(() => {
       <section className="produtos-hero">
         <Container>
           <Row className="align-items-center py-5">
-            <Col lg={7} className="text-white text-center text-lg-start mb-4 mb-lg-0">
+            <Col lg={6} className="text-white text-center text-lg-start mb-4 mb-lg-0">
               <h1 className="display-5 fw-bold mb-3">O melhor do mundo da refrigeração</h1>
               <p className="lead mb-4">
                 Encontre soluções completas para seu conforto térmico com qualidade e economia.
@@ -57,7 +57,7 @@ useEffect(() => {
                 Fale com um especialista
               </Button>
             </Col>
-            <Col lg={5} className="d-none d-lg-block">
+            <Col lg={5} className="text-center">
               <img 
                 src="/Images/produtos-refrigeracao.webp" 
                 alt="Produtos de refrigeração" 

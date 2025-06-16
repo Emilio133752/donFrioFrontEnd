@@ -9,7 +9,7 @@ const SobreNos = () => {
       <section className="hero-section">
         <Container>
           <Row className="align-items-center py-5">
-            <Col lg={7} className="text-center text-lg-start mb-4 mb-lg-0">
+            <Col lg={6} className="text-center text-lg-start mb-4 mb-lg-0">
               <div className="pe-lg-4">
                 <h1 className="display-5 fw-bold mb-3">Sobre Nós</h1>
                 <p className="lead mb-4">
@@ -21,12 +21,11 @@ const SobreNos = () => {
                 </Button>
               </div>
             </Col>
-            <Col lg={4} className="text-center">
+            <Col lg={5} className="text-center">
               <Image 
                 src="/Images/sobre-nos.jpg" 
                 alt="Imagem de pessoas negociando" 
                 className="img-fluid rounded shadow-lg" 
-                style={{ maxHeight: '350px' }}
               />
             </Col>
           </Row>
