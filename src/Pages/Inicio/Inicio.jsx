@@ -35,7 +35,7 @@ const Inicio = () => {
               <h1 className="display-5 fw-bold mb-3">Bem vindo!</h1>
               <p className="lead mb-4">Encontre os melhores produtos para refrigeração e conforto térmico</p>
             </Col>
-            <Col lg={6} className="text-center">
+            <Col lg={5} className="text-center">
               <img 
                 src="Images/logo.JPG" 
                 alt="Produtos de refrigeração" 
