@@ -7,7 +7,8 @@ import './Produtos.css';
 const Produtos = () => {
   const [produtos, setProdutos] = useState([]);
   const [categoriaAtiva, setCategoriaAtiva] = useState('todos');
-  const [precoRange, setPrecoRange] = useState(2000);
+  const [precoRange, setPrecoRange] = useState(5000);
+  const [precoFiltroAtivo, setPrecoFiltroAtivo] = useState(true);
   const [termoBusca, setTermoBusca] = useState('');
 
 
@@ -28,11 +29,19 @@ useEffect(() => {
 
   const produtosFiltrados = produtos.filter(produto => {
     const matchCategoria = categoriaAtiva === 'todos' || produto.categoria === categoriaAtiva;
-    const matchPreco = produto.preco <= precoRange;
+    const matchPreco = !precoFiltroAtivo || produto.preco <= precoRange;
     const matchBusca = produto.nome.toLowerCase().includes(termoBusca.toLowerCase()) ||
                        produto.descricao.toLowerCase().includes(termoBusca.toLowerCase());
     return matchCategoria && matchPreco && matchBusca;
   });
+
+  const limparFiltroPreco = () => {
+    setPrecoFiltroAtivo(false);
+  };
+
+  const ativarFiltroPreco = () => {
+    setPrecoFiltroAtivo(true);
+  };
 
   return (
     <>
@@ -106,19 +115,40 @@ useEffect(() => {
 
                   <hr className="my-4" />
                   
-                  <h6 className="mb-3">Faixa de Preço</h6>
-                  <Form.Label>Até R$ {precoRange.toFixed(2)}</Form.Label>
-                  <Form.Range 
-                    min={100} 
-                    max={2000} 
-                    step={100}
-                    value={precoRange}
-                    onChange={(e) => setPrecoRange(Number(e.target.value))}
-                  />
-                  <div className="d-flex justify-content-between">
-                    <small>R$ 100,00</small>
-                    <small>R$ 2.000,00</small>
+                  <div className="d-flex justify-content-between align-items-center mb-3">
+                    <h6 className="mb-0">Faixa de Preço</h6>
+                    <Button 
+                      variant={precoFiltroAtivo ? "outline-secondary" : "success"}
+                      size="sm"
+                      onClick={precoFiltroAtivo ? limparFiltroPreco : ativarFiltroPreco}
+                    >
+                      {precoFiltroAtivo ? "Ignorar" : "Ativar"}
+                    </Button>
                   </div>
+                  
+                  {precoFiltroAtivo ? (
+                    <>
+                <div className="d-flex justify-content-between align-items-center mb-2">
+                  <span className="text-muted">Preço máximo</span>
+                  <Badge bg="primary" pill>R$ {precoRange.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</Badge>
+                </div>
+                      <Form.Range 
+                        min={100} 
+                        max={5000} 
+                        step={100}
+                        value={precoRange}
+                        onChange={(e) => setPrecoRange(Number(e.target.value))}
+                      />
+                      <div className="d-flex justify-content-between">
+                        <small>R$ 100,00</small>
+                        <small>R$ 5.000,00</small>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-center py-3 text-muted">
+                      <small>Filtro de preço desativado.<br/>Mostrando todos os preços</small>
+                    </div>
+                  )}
                 </Card.Body>
               </Card>
             </Col>
@@ -188,7 +218,8 @@ useEffect(() => {
                         variant="outline-primary"
                         onClick={() => {
                           setCategoriaAtiva('todos');
-                          setPrecoRange(2000);
+                          setPrecoRange(5000);
+                          setPrecoFiltroAtivo(true);
                           setTermoBusca('');
                         }}
                       >

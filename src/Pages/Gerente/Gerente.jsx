@@ -241,12 +241,14 @@ const Gerente = () => {
                               <td>{produto.destaque ? <Badge bg="success">Sim</Badge> : <Badge bg="secondary">Não</Badge>}</td>
                               <td>{produto.descricao}</td>
                               <td>
-                                <Button variant="outline-primary" size="sm" onClick={() => handleShowEditProduto(produto)} className="me-2">
-                                  <i className="bi bi-pencil-square"></i> Editar
-                                </Button>
-                                <Button variant="outline-danger" size="sm" onClick={() => handleShowDeleteProduto(produto)}>
-                                  <i className="bi bi-trash"></i> Excluir
-                                </Button>
+                                <div className="d-flex gap-2">
+                                  <Button variant="outline-primary" size="sm" onClick={() => handleShowEditProduto(produto)} style={{minWidth: '70px'}}>
+                                    <i className="bi bi-pencil-square"></i> Editar
+                                  </Button>
+                                  <Button variant="outline-danger" size="sm" onClick={() => handleShowDeleteProduto(produto)} style={{minWidth: '70px'}}>
+                                    <i className="bi bi-trash"></i> Excluir
+                                  </Button>
+                                </div>
                               </td>
                             </tr>
                           ))}
@@ -378,7 +380,7 @@ const Gerente = () => {
                 value={newProduto.categoria}
                 onChange={e => setNewProduto({...newProduto, categoria: e.target.value})}
               >
-                <option value="">Selecione uma categoria</option>
+                <option value="" disabled>Selecione uma categoria</option>
                 {categorias.map(categoria => (
                   <option key={categoria} value={categoria}>{categoria}</option>
                 ))}
@@ -446,7 +448,7 @@ const Gerente = () => {
                 value={currentProduto.categoria || ''}
                 onChange={e => setCurrentProduto({...currentProduto, categoria: e.target.value})}
               >
-                <option value="">Selecione uma categoria</option>
+                <option value="" disabled>Selecione uma categoria</option>
                 {categorias.map(categoria => (
                   <option key={categoria} value={categoria}>{categoria}</option>
                 ))}
