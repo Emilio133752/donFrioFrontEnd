@@ -12,7 +12,7 @@
 .produtos-hero {
   background: var(--primary-color) !important;
   color: var(--light-color) !important;
-  padding: 3rem 0;
+  padding: 2rem 1rem;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -24,9 +24,13 @@
 }
 
 .produtos-hero h1 {
-  color: white !important;
-  -webkit-text-fill-color: initial !important;
+  font-size: 2.5rem; /* igual aos outros */
+  font-weight: 700;
+  color: var(--white); /* ou a cor que seus outros h1 usam */
+  text-shadow: none; /* remove sombra se tiver */
+  -webkit-text-fill-color: unset !important; /* tira interferência */
 }
+
 
 .produtos-hero::before, .produtos-hero::after {
   content: '';
